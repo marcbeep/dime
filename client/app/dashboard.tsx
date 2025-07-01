@@ -5,7 +5,7 @@ import { Header, Sidebar, MainContent } from "@/components/dashboard";
 import { Account, CategoryGroup } from "@/components/dashboard/types";
 
 export default function Dashboard() {
-  const [selectedMonth, setSelectedMonth] = useState("July 2025");
+  const [selectedMonth] = useState("July 2025");
   const [expandedCategories, setExpandedCategories] = useState<string[]>([
     "savings",
     "obligations",

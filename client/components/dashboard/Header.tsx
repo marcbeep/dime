@@ -57,7 +57,7 @@ export function Header({
           <AvatarFallback className="bg-blue-600 text-white">J</AvatarFallback>
         </Avatar>
         <div>
-          <h2 className="font-semibold text-slate-900">John's Budget</h2>
+          <h2 className="font-semibold text-slate-900">John&apos;s Budget</h2>
           <p className="text-sm text-slate-500">john.doe@university.edu</p>
         </div>
       </div>
@@ -136,7 +136,9 @@ export function Header({
               </AvatarFallback>
             </Avatar>
             <div>
-              <h1 className="font-semibold text-slate-900">John's Budget</h1>
+              <h1 className="font-semibold text-slate-900">
+                John&apos;s Budget
+              </h1>
               <p className="text-sm text-slate-500">john.doe@university.edu</p>
             </div>
           </div>
