@@ -11,11 +11,9 @@ import {
   Heart,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useCurrency } from "@/lib/hooks/useCurrency";
+import { formatAmount } from "../../lib/utils";
 
 export function HeroSection() {
-  const { formatAmount } = useCurrency();
-
   return (
     <div className="max-w-6xl mx-auto">
       <div className="grid lg:grid-cols-2 gap-16 items-center">
