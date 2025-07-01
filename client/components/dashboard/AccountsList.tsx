@@ -20,7 +20,7 @@ export function AccountsList({ accounts }: AccountsListProps) {
   const totalBalance = accounts.reduce((sum, acc) => sum + acc.balance, 0);
 
   return (
-    <Card>
+    <Card className="rounded-2xl">
       <CardHeader className="pb-3">
         <CardTitle className="text-lg flex items-center justify-between">
           Accounts
@@ -33,7 +33,7 @@ export function AccountsList({ accounts }: AccountsListProps) {
         {accounts.map((account) => (
           <div
             key={account.name}
-            className="flex items-center justify-between p-3 rounded-lg bg-slate-50 hover:bg-slate-100 transition-colors"
+            className="flex items-center justify-between p-3 rounded-2xl bg-slate-50 hover:bg-slate-100 transition-colors"
           >
             <div className="flex items-center gap-3">
               <div className={`w-3 h-3 rounded-full ${account.color}`} />
@@ -45,7 +45,7 @@ export function AccountsList({ accounts }: AccountsListProps) {
           </div>
         ))}
         <Separator className="my-3" />
-        <div className="flex items-center justify-between p-3 rounded-lg bg-blue-50">
+        <div className="flex items-center justify-between p-3 rounded-2xl bg-blue-50">
           <span className="font-semibold text-blue-900">Total</span>
           <span className="font-bold text-blue-900">
             {formatCurrency(totalBalance)}

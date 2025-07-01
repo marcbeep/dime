@@ -4,7 +4,7 @@ import { Card, CardContent } from "@/components/ui/card";
 
 export function Navigation() {
   return (
-    <Card>
+    <Card className="rounded-2xl">
       <CardContent className="p-4">
         <nav className="space-y-2">
           <Button variant="default" className="w-full justify-start gap-3 h-12">

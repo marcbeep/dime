@@ -2,6 +2,7 @@ import { ChevronDown, ChevronUp } from "lucide-react";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { BudgetCategory } from "./BudgetCategory";
 import { CategoryGroup } from "./types";
+import { Badge } from "@/components/ui/badge";
 
 interface BudgetCategoryGroupProps {
   group: CategoryGroup;
@@ -14,25 +15,42 @@ export function BudgetCategoryGroup({
   isExpanded,
   onToggle,
 }: BudgetCategoryGroupProps) {
+  const groupTotal = group.categories.reduce(
+    (sum, cat) => sum + cat.available,
+    0
+  );
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat("en-GB", {
+      style: "currency",
+      currency: "GBP",
+      minimumFractionDigits: 2,
+    }).format(amount);
+  };
   return (
-    <Card className="overflow-hidden">
+    <Card className="overflow-hidden rounded-2xl">
       <CardHeader
-        className="pb-3 cursor-pointer hover:bg-slate-50 transition-colors"
+        className="pb-3 cursor-pointer hover:bg-slate-50 transition-colors rounded-t-2xl"
         onClick={onToggle}
       >
         <div className="flex items-center justify-between">
-          <CardTitle className="text-lg text-slate-900 flex items-center gap-2">
+          <CardTitle className="text-base lg:text-lg text-slate-900 flex items-center gap-2">
             {isExpanded ? (
-              <ChevronDown className="h-5 w-5" />
+              <ChevronUp className="h-4 w-4 lg:h-5 lg:w-5" />
             ) : (
-              <ChevronUp className="h-5 w-5" />
+              <ChevronDown className="h-4 w-4 lg:h-5 lg:w-5" />
             )}
             {group.name}
+            <Badge
+              className="ml-2 bg-blue-100 text-blue-800 font-bold"
+              variant="secondary"
+            >
+              {formatCurrency(groupTotal)}
+            </Badge>
           </CardTitle>
-          <div className="flex items-center gap-6 text-sm font-medium text-slate-600">
-            <span className="w-20 text-right">Assigned</span>
-            <span className="w-20 text-right">Activity</span>
-            <span className="w-24 text-right">Available</span>
+          <div className="hidden sm:flex items-center gap-4 lg:gap-6 text-xs lg:text-sm font-medium text-slate-600">
+            <span className="w-16 lg:w-20 text-right">Assigned</span>
+            <span className="w-16 lg:w-20 text-right">Activity</span>
+            <span className="w-20 lg:w-24 text-right">Available</span>
           </div>
         </div>
       </CardHeader>

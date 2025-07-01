@@ -15,7 +15,7 @@ export function BudgetCategories({
   onToggleCategory,
 }: BudgetCategoriesProps) {
   return (
-    <div className="space-y-4">
+    <div className="space-y-3 lg:space-y-4">
       {categoryGroups.map((group) => (
         <BudgetCategoryGroup
           key={group.id}
@@ -28,7 +28,7 @@ export function BudgetCategories({
       {/* Add Category Button */}
       <Button
         variant="outline"
-        className="w-full h-12 border-dashed border-2 hover:border-solid bg-transparent"
+        className="w-full h-12 border-dashed border-2 hover:border-solid bg-transparent rounded-2xl"
       >
         <Plus className="h-5 w-5 mr-2" />
         Add Category Group

@@ -8,7 +8,7 @@ interface SidebarProps {
 
 export function Sidebar({ accounts }: SidebarProps) {
   return (
-    <div className="lg:col-span-1">
+    <div className="hidden lg:block lg:col-span-1">
       <div className="space-y-6">
         <Navigation />
         <AccountsList accounts={accounts} />
