@@ -82,7 +82,7 @@ export function HeroSection() {
             <div className="absolute top-1/2 -right-4 w-16 h-16 bg-brand-green rounded-full opacity-50 animate-float animation-delay-2000 hidden lg:block"></div>
 
             {/* Main Activity Card Container - Square and Responsive */}
-            <div className="relative overflow-hidden">
+            <div className="relative overflow-hidden rounded-3xl">
               <div className="w-96 h-96 lg:w-[480px] lg:h-[480px] bg-gradient-to-br from-brand-green to-brand-blue rounded-3xl p-6 lg:p-8 relative overflow-hidden transform hover:scale-105 transition-transform duration-300">
                 {/* Background pattern */}
                 <div className="absolute inset-0 opacity-5">
@@ -92,9 +92,9 @@ export function HeroSection() {
                 </div>
 
                 {/* Notification Cards */}
-                <div className="relative z-10 space-y-3 lg:space-y-4">
+                <div className="relative z-10 space-y-3 lg:space-y-4 group">
                   {/* Card 1 - Recent spending */}
-                  <div className="bg-white rounded-xl shadow-sm border p-3 lg:p-4 transform -rotate-1 hover:rotate-0 hover:scale-105 transition-all duration-300 animate-slide-in-left animation-delay-800">
+                  <div className="bg-white rounded-xl shadow-sm border p-3 lg:p-4 transform -rotate-1 hover:rotate-0 group-hover:scale-95 transition-all duration-300 hover:scale-105 animate-slide-in-left animation-delay-800">
                     <div className="flex items-center space-x-3">
                       <div className="w-10 h-10 bg-brand-red rounded-full flex items-center justify-center flex-shrink-0">
                         <Train className="h-5 w-5 text-brand-red-foreground" />
@@ -114,7 +114,7 @@ export function HeroSection() {
                   </div>
 
                   {/* Card 2 - Grocery spending */}
-                  <div className="bg-white rounded-xl shadow-sm border p-3 lg:p-4 transform rotate-1 hover:rotate-0 hover:scale-105 transition-all duration-300 animate-slide-in-right animation-delay-1000">
+                  <div className="bg-white rounded-xl shadow-sm border p-3 lg:p-4 transform rotate-1 hover:rotate-0 group-hover:scale-95 transition-all duration-300 hover:scale-105 animate-slide-in-right animation-delay-1000">
                     <div className="flex items-center space-x-3">
                       <div className="w-10 h-10 bg-brand-green rounded-full flex items-center justify-center flex-shrink-0">
                         <ShoppingCart className="h-5 w-5 text-brand-green-foreground" />
@@ -134,7 +134,7 @@ export function HeroSection() {
                   </div>
 
                   {/* Card 3 - Income */}
-                  <div className="bg-white rounded-xl shadow-sm border p-3 lg:p-4 transform -rotate-1 hover:rotate-0 hover:scale-105 transition-all duration-300 animate-slide-in-left animation-delay-1200">
+                  <div className="bg-white rounded-xl shadow-sm border p-3 lg:p-4 transform -rotate-1 hover:rotate-0 group-hover:scale-95 transition-all duration-300 hover:scale-105 animate-slide-in-left animation-delay-1200">
                     <div className="flex items-center space-x-3">
                       <div className="w-10 h-10 bg-brand-blue rounded-full flex items-center justify-center flex-shrink-0">
                         <Briefcase className="h-5 w-5 text-brand-blue-foreground" />
@@ -154,7 +154,7 @@ export function HeroSection() {
                   </div>
 
                   {/* Card 4 - Subscription */}
-                  <div className="bg-white rounded-xl shadow-sm border p-3 lg:p-4 transform rotate-2 hover:rotate-0 hover:scale-105 transition-all duration-300 animate-slide-in-right animation-delay-1400">
+                  <div className="bg-white rounded-xl shadow-sm border p-3 lg:p-4 transform rotate-2 hover:rotate-0 group-hover:scale-95 transition-all duration-300 hover:scale-105 animate-slide-in-right animation-delay-1400">
                     <div className="flex items-center space-x-3">
                       <div className="w-10 h-10 bg-brand-purple rounded-full flex items-center justify-center flex-shrink-0">
                         <Tv className="h-5 w-5 text-brand-purple-foreground" />
@@ -169,26 +169,6 @@ export function HeroSection() {
                       </div>
                       <div className="text-sm lg:text-base font-semibold text-destructive flex-shrink-0">
                         -{formatAmount(12.99)}
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Card 5 - Coffee */}
-                  <div className="bg-white rounded-xl shadow-sm border p-3 lg:p-4 transform -rotate-2 hover:rotate-0 hover:scale-105 transition-all duration-300 animate-slide-in-left animation-delay-1600">
-                    <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-brand-yellow rounded-full flex items-center justify-center flex-shrink-0">
-                        <Coffee className="h-5 w-5 text-brand-yellow-foreground" />
-                      </div>
-                      <div className="flex-1 min-w-0">
-                        <p className="font-semibold text-primary text-sm lg:text-base">
-                          Coffee at Starbucks
-                        </p>
-                        <p className="text-xs lg:text-sm text-muted-foreground font-normal">
-                          Food & Drink • 3 days ago
-                        </p>
-                      </div>
-                      <div className="text-sm lg:text-base font-semibold text-destructive flex-shrink-0">
-                        -{formatAmount(4.5)}
                       </div>
                     </div>
                   </div>
