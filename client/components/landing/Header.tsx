@@ -1,5 +1,5 @@
 "use client";
-import { Menu, X, Star } from "lucide-react";
+import { Menu, X, Star, Coins } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
@@ -13,7 +13,8 @@ export function Header() {
           {/* Logo */}
           <div className="flex items-center">
             <div className="text-2xl font-bold text-black">
-              <span className="mr-1">💰</span>Dime
+              <Coins className="inline mr-1 h-6 w-6 text-blue-600" />
+              Dime
             </div>
           </div>
 
@@ -57,9 +58,7 @@ export function Header() {
             <Button variant="ghost" size="sm">
               Log In
             </Button>
-            <Button size="sm" className="bg-blue-600 hover:bg-blue-700">
-              Sign Up
-            </Button>
+            <Button size="sm">Sign Up</Button>
           </div>
 
           {/* Mobile menu button */}

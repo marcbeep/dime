@@ -1,4 +1,4 @@
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, Sparkles } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function CallToAction() {
@@ -6,9 +6,9 @@ export function CallToAction() {
     <div className="mb-12">
       <Button
         variant="outline"
-        className="text-red-600 border-red-200 hover:bg-red-50 bg-transparent"
+        className="text-brand-red-foreground border-brand-red hover:bg-brand-red bg-transparent"
       >
-        <span className="mr-2">✨</span>
+        <Sparkles className="mr-2 h-4 w-4" />
         See how it works!
         <ArrowRight className="ml-2 h-4 w-4" />
       </Button>

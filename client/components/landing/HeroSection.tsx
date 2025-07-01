@@ -1,7 +1,20 @@
-import { ArrowRight } from "lucide-react";
+import {
+  ArrowRight,
+  Coins,
+  BarChart3,
+  Target,
+  Train,
+  ShoppingCart,
+  Briefcase,
+  Tv,
+  Coffee,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useCurrency } from "@/lib/hooks/useCurrency";
 
 export function HeroSection() {
+  const { formatAmount, isLoading } = useCurrency();
+
   return (
     <div className="max-w-6xl mx-auto">
       <div className="grid lg:grid-cols-2 gap-16 items-center">
@@ -12,19 +25,19 @@ export function HeroSection() {
 
           <div className="text-4xl lg:text-5xl font-bold mb-8 space-y-2 animate-slide-up animation-delay-200 font-outfit">
             <div className="flex items-center space-x-4">
-              <span className="bg-blue-100 text-blue-600 px-3 py-1 rounded-lg flex items-center transform hover:scale-105 transition-transform duration-200 font-medium">
-                <span className="mr-2">💰</span>
+              <span className="bg-brand-blue text-brand-blue-foreground px-3 py-1 rounded-lg flex items-center transform hover:scale-105 transition-transform duration-200 font-medium">
+                <Coins className="mr-2 h-5 w-5" />
                 budget
               </span>
-              <span className="bg-green-100 text-green-600 px-3 py-1 rounded-lg flex items-center transform hover:scale-105 transition-transform duration-200 font-medium">
-                <span className="mr-2">📊</span>
+              <span className="bg-brand-green text-brand-green-foreground px-3 py-1 rounded-lg flex items-center transform hover:scale-105 transition-transform duration-200 font-medium">
+                <BarChart3 className="mr-2 h-5 w-5" />
                 track
               </span>
               <span className="text-gray-900">&</span>
             </div>
             <div>
-              <span className="bg-purple-100 text-purple-600 px-3 py-1 rounded-lg flex items-center inline-flex transform hover:scale-105 transition-transform duration-200 font-medium">
-                <span className="mr-2">🎯</span>
+              <span className="bg-brand-purple text-brand-purple-foreground px-3 py-1 rounded-lg flex items-center inline-flex transform hover:scale-105 transition-transform duration-200 font-medium">
+                <Target className="mr-2 h-5 w-5" />
                 achieve
               </span>
             </div>
@@ -38,7 +51,7 @@ export function HeroSection() {
           <div className="flex flex-col sm:flex-row gap-4 animate-slide-up animation-delay-600">
             <Button
               size="lg"
-              className="bg-black hover:bg-gray-800 text-white transform hover:scale-105 transition-all duration-200 font-semibold"
+              className="transform hover:scale-105 transition-all duration-200 font-semibold"
             >
               Start Budgeting Free
               <ArrowRight className="ml-2 h-5 w-5" />
@@ -50,18 +63,18 @@ export function HeroSection() {
         <div className="relative animate-fade-in animation-delay-300">
           <div className="relative flex justify-center">
             {/* Background decorative elements */}
-            <div className="absolute -top-8 -right-8 w-32 h-32 bg-orange-100 rounded-full opacity-50 animate-float hidden lg:block"></div>
-            <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-blue-100 rounded-full opacity-50 animate-float animation-delay-1000 hidden lg:block"></div>
-            <div className="absolute top-1/2 -right-4 w-16 h-16 bg-green-100 rounded-full opacity-50 animate-float animation-delay-2000 hidden lg:block"></div>
+            <div className="absolute -top-8 -right-8 w-32 h-32 bg-brand-yellow rounded-full opacity-50 animate-float hidden lg:block"></div>
+            <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-brand-blue rounded-full opacity-50 animate-float animation-delay-1000 hidden lg:block"></div>
+            <div className="absolute top-1/2 -right-4 w-16 h-16 bg-brand-green rounded-full opacity-50 animate-float animation-delay-2000 hidden lg:block"></div>
 
             {/* Main Activity Card Container - Square and Responsive */}
             <div className="relative">
-              <div className="w-96 h-96 lg:w-[480px] lg:h-[480px] bg-gradient-to-br from-green-50 to-blue-50 rounded-3xl p-6 lg:p-8 relative overflow-hidden transform hover:scale-105 transition-transform duration-300">
+              <div className="w-96 h-96 lg:w-[480px] lg:h-[480px] bg-gradient-to-br from-brand-green to-brand-blue rounded-3xl p-6 lg:p-8 relative overflow-hidden transform hover:scale-105 transition-transform duration-300">
                 {/* Background pattern */}
                 <div className="absolute inset-0 opacity-5">
-                  <div className="absolute top-10 left-10 w-20 h-20 bg-green-300 rounded-full animate-pulse"></div>
-                  <div className="absolute bottom-20 right-10 w-16 h-16 bg-blue-300 rounded-full animate-pulse animation-delay-500"></div>
-                  <div className="absolute top-1/2 right-20 w-12 h-12 bg-purple-300 rounded-full animate-pulse animation-delay-1000"></div>
+                  <div className="absolute top-10 left-10 w-20 h-20 bg-brand-green-foreground rounded-full animate-pulse"></div>
+                  <div className="absolute bottom-20 right-10 w-16 h-16 bg-brand-blue-foreground rounded-full animate-pulse animation-delay-500"></div>
+                  <div className="absolute top-1/2 right-20 w-12 h-12 bg-brand-purple-foreground rounded-full animate-pulse animation-delay-1000"></div>
                 </div>
 
                 {/* Notification Cards */}
@@ -69,19 +82,19 @@ export function HeroSection() {
                   {/* Card 1 - Recent spending */}
                   <div className="bg-white rounded-xl shadow-sm border p-3 lg:p-4 transform -rotate-1 hover:rotate-0 hover:scale-105 transition-all duration-300 animate-slide-in-left animation-delay-800">
                     <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-red-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <span className="text-lg">🚆</span>
+                      <div className="w-10 h-10 bg-brand-red rounded-full flex items-center justify-center flex-shrink-0">
+                        <Train className="h-5 w-5 text-brand-red-foreground" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="font-semibold text-gray-900 text-sm lg:text-base">
-                          £40 spent on Trainline
+                          {formatAmount(40)} spent on Trainline
                         </p>
                         <p className="text-xs lg:text-sm text-gray-500 font-normal">
                           Transport • 2 hours ago
                         </p>
                       </div>
                       <div className="text-sm lg:text-base font-semibold text-red-600 flex-shrink-0">
-                        -£40.00
+                        -{formatAmount(40)}
                       </div>
                     </div>
                   </div>
@@ -89,19 +102,19 @@ export function HeroSection() {
                   {/* Card 2 - Grocery spending */}
                   <div className="bg-white rounded-xl shadow-sm border p-3 lg:p-4 transform rotate-1 hover:rotate-0 hover:scale-105 transition-all duration-300 animate-slide-in-right animation-delay-1000">
                     <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-green-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <span className="text-lg">🛒</span>
+                      <div className="w-10 h-10 bg-brand-green rounded-full flex items-center justify-center flex-shrink-0">
+                        <ShoppingCart className="h-5 w-5 text-brand-green-foreground" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="font-semibold text-gray-900 text-sm lg:text-base">
-                          £85 spent at Tesco
+                          {formatAmount(85)} spent at Tesco
                         </p>
                         <p className="text-xs lg:text-sm text-gray-500 font-normal">
                           Groceries • 4 hours ago
                         </p>
                       </div>
                       <div className="text-sm lg:text-base font-semibold text-red-600 flex-shrink-0">
-                        -£85.00
+                        -{formatAmount(85)}
                       </div>
                     </div>
                   </div>
@@ -109,8 +122,8 @@ export function HeroSection() {
                   {/* Card 3 - Income */}
                   <div className="bg-white rounded-xl shadow-sm border p-3 lg:p-4 transform -rotate-1 hover:rotate-0 hover:scale-105 transition-all duration-300 animate-slide-in-left animation-delay-1200">
                     <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-blue-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <span className="text-lg">💼</span>
+                      <div className="w-10 h-10 bg-brand-blue rounded-full flex items-center justify-center flex-shrink-0">
+                        <Briefcase className="h-5 w-5 text-brand-blue-foreground" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="font-semibold text-gray-900 text-sm lg:text-base">
@@ -121,7 +134,7 @@ export function HeroSection() {
                         </p>
                       </div>
                       <div className="text-sm lg:text-base font-semibold text-green-600 flex-shrink-0">
-                        +£2,500.00
+                        +{formatAmount(2500)}
                       </div>
                     </div>
                   </div>
@@ -129,19 +142,19 @@ export function HeroSection() {
                   {/* Card 4 - Subscription */}
                   <div className="bg-white rounded-xl shadow-sm border p-3 lg:p-4 transform rotate-2 hover:rotate-0 hover:scale-105 transition-all duration-300 animate-slide-in-right animation-delay-1400">
                     <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-purple-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <span className="text-lg">📺</span>
+                      <div className="w-10 h-10 bg-brand-purple rounded-full flex items-center justify-center flex-shrink-0">
+                        <Tv className="h-5 w-5 text-brand-purple-foreground" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="font-semibold text-gray-900 text-sm lg:text-base">
-                          £12.99 Netflix subscription
+                          {formatAmount(12.99)} Netflix subscription
                         </p>
                         <p className="text-xs lg:text-sm text-gray-500 font-normal">
                           Entertainment • 2 days ago
                         </p>
                       </div>
                       <div className="text-sm lg:text-base font-semibold text-red-600 flex-shrink-0">
-                        -£12.99
+                        -{formatAmount(12.99)}
                       </div>
                     </div>
                   </div>
@@ -149,19 +162,19 @@ export function HeroSection() {
                   {/* Card 5 - Coffee */}
                   <div className="bg-white rounded-xl shadow-sm border p-3 lg:p-4 transform -rotate-2 hover:rotate-0 hover:scale-105 transition-all duration-300 animate-slide-in-left animation-delay-1600">
                     <div className="flex items-center space-x-3">
-                      <div className="w-10 h-10 bg-yellow-100 rounded-full flex items-center justify-center flex-shrink-0">
-                        <span className="text-lg">☕</span>
+                      <div className="w-10 h-10 bg-brand-yellow rounded-full flex items-center justify-center flex-shrink-0">
+                        <Coffee className="h-5 w-5 text-brand-yellow-foreground" />
                       </div>
                       <div className="flex-1 min-w-0">
                         <p className="font-semibold text-gray-900 text-sm lg:text-base">
-                          £4.50 at Starbucks
+                          {formatAmount(4.5)} at Starbucks
                         </p>
                         <p className="text-xs lg:text-sm text-gray-500 font-normal">
                           Food & Drink • 3 days ago
                         </p>
                       </div>
                       <div className="text-sm lg:text-base font-semibold text-red-600 flex-shrink-0">
-                        -£4.50
+                        -{formatAmount(4.5)}
                       </div>
                     </div>
                   </div>
@@ -175,7 +188,7 @@ export function HeroSection() {
                         This month
                       </span>
                       <span className="text-xs lg:text-sm font-bold text-green-600">
-                        £1,200 under budget
+                        {formatAmount(1200)} under budget
                       </span>
                     </div>
                   </div>
