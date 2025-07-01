@@ -121,6 +121,52 @@
   }
 }
 
+/* Cursor pointer for all clickable elements */
+@layer utilities {
+  /* Buttons and button-like elements */
+  button,
+  [role="button"],
+  .cursor-pointer {
+    cursor: pointer;
+  }
+
+  /* Links */
+  a[href],
+  a[href]:hover {
+    cursor: pointer;
+  }
+
+  /* Interactive elements with click handlers */
+  [onclick],
+  [onClick] {
+    cursor: pointer;
+  }
+
+  /* Form elements that are clickable */
+  input[type="button"],
+  input[type="submit"],
+  input[type="reset"],
+  input[type="file"] {
+    cursor: pointer;
+  }
+
+  /* Select elements */
+  select {
+    cursor: pointer;
+  }
+
+  /* Summary elements (for details/summary) */
+  summary {
+    cursor: pointer;
+  }
+
+  /* Any element with a click handler or button role */
+  [data-slot="button"],
+  [data-radix-collection-item] {
+    cursor: pointer;
+  }
+}
+
 /* Custom Animations */
 @keyframes fadeIn {
   from {

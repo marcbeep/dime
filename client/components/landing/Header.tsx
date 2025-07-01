@@ -23,7 +23,7 @@ export function Header() {
               Features
             </a>
             <div className="relative group">
-              <button className="text-gray-700 hover:text-gray-900 flex items-center">
+              <button className="text-gray-700 hover:text-gray-900 flex items-center cursor-pointer">
                 How it Works
                 <svg
                   className="ml-1 h-4 w-4"
