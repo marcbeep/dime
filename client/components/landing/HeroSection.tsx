@@ -7,7 +7,6 @@ import {
   ShoppingCart,
   Briefcase,
   Tv,
-  Coffee,
   Heart,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -19,7 +18,7 @@ export function HeroSection() {
       <div className="grid lg:grid-cols-2 gap-16 items-center">
         <div className="text-left px-4 sm:px-0 animate-fade-in">
           <h1 className="text-4xl lg:text-5xl font-bold text-primary leading-tight mb-6 animate-slide-up font-outfit">
-            Dime makes it easy to budget, track, and take control of your money
+            Dime makes it easy peasy lemon squeezy to
           </h1>
 
           <div className="text-4xl lg:text-5xl font-bold mb-8 space-y-2 animate-slide-up animation-delay-200 font-outfit">
@@ -43,8 +42,8 @@ export function HeroSection() {
           </div>
 
           <p className="text-xl text-muted-foreground mb-8 leading-relaxed animate-slide-up animation-delay-400 font-normal">
-            Master zero-based budgeting where every dollar has a purpose. Track
-            expenses, set goals, and build wealth with confidence.
+            Every dollar has a purpose. Never be scared of your personal
+            finances again, ever.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 animate-slide-up animation-delay-600">
@@ -52,7 +51,7 @@ export function HeroSection() {
               size="lg"
               className="transform hover:scale-105 transition-all duration-200 font-semibold"
             >
-              Start Budgeting Free
+              Start Budgeting for Free
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
             <Button
