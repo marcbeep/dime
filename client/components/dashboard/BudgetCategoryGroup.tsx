@@ -19,6 +19,7 @@ export function BudgetCategoryGroup({
     (sum, cat) => sum + cat.available,
     0
   );
+
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat("en-GB", {
       style: "currency",
@@ -26,38 +27,39 @@ export function BudgetCategoryGroup({
       minimumFractionDigits: 2,
     }).format(amount);
   };
+
   return (
-    <Card className="overflow-hidden rounded-2xl">
+    <Card className="border border-slate-200/60 shadow-sm bg-white/80 backdrop-blur-sm overflow-hidden">
       <CardHeader
-        className="pb-3 cursor-pointer hover:bg-slate-50 transition-colors rounded-t-2xl"
+        className="pb-4 cursor-pointer hover:bg-slate-50/50 transition-all duration-200 group"
         onClick={onToggle}
       >
         <div className="flex items-center justify-between">
-          <CardTitle className="text-base lg:text-lg text-slate-900 flex items-center gap-2">
+          <CardTitle className="text-base font-semibold text-slate-900 flex items-center gap-3">
             {isExpanded ? (
-              <ChevronUp className="h-4 w-4 lg:h-5 lg:w-5" />
+              <ChevronUp className="h-4 w-4 text-slate-600 group-hover:text-slate-800 transition-colors" />
             ) : (
-              <ChevronDown className="h-4 w-4 lg:h-5 lg:w-5" />
+              <ChevronDown className="h-4 w-4 text-slate-600 group-hover:text-slate-800 transition-colors" />
             )}
             {group.name}
             <Badge
-              className="ml-2 bg-blue-100 text-blue-800 font-bold"
+              className="bg-slate-100 text-slate-700 hover:bg-slate-100 font-medium border-0"
               variant="secondary"
             >
               {formatCurrency(groupTotal)}
             </Badge>
           </CardTitle>
-          <div className="hidden sm:flex items-center gap-4 lg:gap-6 text-xs lg:text-sm font-medium text-slate-600">
-            <span className="w-16 lg:w-20 text-right">Assigned</span>
-            <span className="w-16 lg:w-20 text-right">Activity</span>
-            <span className="w-20 lg:w-24 text-right">Available</span>
+          <div className="hidden sm:flex items-center gap-6 text-xs font-medium text-slate-600">
+            <span className="w-20 text-right">Assigned</span>
+            <span className="w-20 text-right">Activity</span>
+            <span className="w-24 text-right">Available</span>
           </div>
         </div>
       </CardHeader>
 
       {isExpanded && (
-        <CardContent className="pt-0">
-          <div className="space-y-2">
+        <CardContent className="pt-0 pb-4">
+          <div className="space-y-1">
             {group.categories.map((category) => (
               <BudgetCategory key={category.name} category={category} />
             ))}

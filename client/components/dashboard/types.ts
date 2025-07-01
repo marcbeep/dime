@@ -16,4 +16,5 @@ export interface Account {
   name: string;
   balance: number;
   color: string;
+  type: "account" | "asset" | "debt";
 }

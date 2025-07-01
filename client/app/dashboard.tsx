@@ -5,7 +5,6 @@ import { Header, Sidebar, MainContent } from "@/components/dashboard";
 import { Account, CategoryGroup } from "@/components/dashboard/types";
 
 export default function Dashboard() {
-  const [selectedMonth] = useState("July 2025");
   const [expandedCategories, setExpandedCategories] = useState<string[]>([
     "savings",
     "obligations",
@@ -14,10 +13,39 @@ export default function Dashboard() {
   const [accountsExpanded, setAccountsExpanded] = useState(false);
 
   const accounts: Account[] = [
-    { name: "Checking", balance: 1200.0, color: "bg-blue-500" },
-    { name: "Savings", balance: 600.0, color: "bg-green-500" },
-    { name: "Venmo", balance: 100.0, color: "bg-purple-500" },
-    { name: "Cash", balance: 100.0, color: "bg-yellow-500" },
+    // Regular budgetable accounts
+    {
+      name: "Checking",
+      balance: 1200.0,
+      color: "bg-blue-500",
+      type: "account",
+    },
+    { name: "Venmo", balance: 100.0, color: "bg-purple-500", type: "account" },
+    { name: "Cash", balance: 100.0, color: "bg-amber-500", type: "account" },
+
+    // Assets (non-budgetable)
+    { name: "Savings", balance: 600.0, color: "bg-emerald-500", type: "asset" },
+    {
+      name: "Investment Account",
+      balance: 2500.0,
+      color: "bg-green-500",
+      type: "asset",
+    },
+    {
+      name: "Emergency Fund",
+      balance: 1000.0,
+      color: "bg-teal-500",
+      type: "asset",
+    },
+
+    // Debts
+    { name: "Credit Card", balance: -450.0, color: "bg-red-500", type: "debt" },
+    {
+      name: "Student Loan",
+      balance: -5000.0,
+      color: "bg-orange-500",
+      type: "debt",
+    },
   ];
 
   const categoryGroups: CategoryGroup[] = [
@@ -186,6 +214,24 @@ export default function Dashboard() {
     },
   ];
 
+  // Calculate total budgetable money (only from "account" type)
+  const budgetableAccounts = accounts.filter((acc) => acc.type === "account");
+  const totalBudgetable = budgetableAccounts.reduce(
+    (sum, acc) => sum + acc.balance,
+    0
+  );
+
+  // Calculate how much has been assigned in budget categories
+  const totalAssigned = categoryGroups.reduce(
+    (sum, group) =>
+      sum +
+      group.categories.reduce((groupSum, cat) => groupSum + cat.assigned, 0),
+    0
+  );
+
+  // Ready to assign = total budgetable money - money already assigned
+  const readyToAssign = totalBudgetable - totalAssigned;
+
   const toggleCategory = (categoryId: string) => {
     setExpandedCategories((prev) =>
       prev.includes(categoryId)
@@ -194,18 +240,8 @@ export default function Dashboard() {
     );
   };
 
-  const handlePreviousMonth = () => {
-    // TODO: Implement month navigation logic
-    console.log("Previous month");
-  };
-
-  const handleNextMonth = () => {
-    // TODO: Implement month navigation logic
-    console.log("Next month");
-  };
-
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100/50">
       <Header
         accounts={accounts}
         mobileMenuOpen={mobileMenuOpen}
@@ -218,12 +254,9 @@ export default function Dashboard() {
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
           <Sidebar accounts={accounts} />
           <MainContent
-            selectedMonth={selectedMonth}
-            readyToAssign={1550.0}
+            readyToAssign={readyToAssign}
             categoryGroups={categoryGroups}
             expandedCategories={expandedCategories}
-            onPreviousMonth={handlePreviousMonth}
-            onNextMonth={handleNextMonth}
             onToggleCategory={toggleCategory}
           />
         </div>
