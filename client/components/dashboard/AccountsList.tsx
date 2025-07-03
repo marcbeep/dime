@@ -3,7 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Account } from "./types";
-import { formatCurrency } from "@/lib/budget-utils";
+import { formatCurrency } from "../../lib/budget-utils";
 
 interface AccountsListProps {
   accounts: Account[];
