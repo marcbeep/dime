@@ -2,6 +2,7 @@
 
 import { useState, useEffect } from "react";
 import { Header, Sidebar, MainContent } from "@/components/dashboard";
+import { Footer } from "@/components/ui/footer";
 import { BudgetData, BudgetCalculations } from "@/components/dashboard/types";
 import {
   fetchBudgetData,
@@ -91,14 +92,14 @@ export default function Dashboard() {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100/20">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100/20 flex flex-col">
       <Header
         accounts={budgetData.accounts}
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
       />
 
-      <div className="max-w-8xl mx-auto px-4 py-4 lg:px-6 lg:py-6">
+      <div className="flex-1 max-w-8xl mx-auto px-4 py-4 lg:px-6 lg:py-6">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
           <div className="lg:col-span-1">
             <Sidebar accounts={budgetData.accounts} />
@@ -113,6 +114,8 @@ export default function Dashboard() {
           </div>
         </div>
       </div>
+
+      <Footer />
     </div>
   );
 }
