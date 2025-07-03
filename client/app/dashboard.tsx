@@ -122,7 +122,7 @@ export default function Dashboard() {
             </div>
             <p className="text-slate-600 mb-2">Reports Coming Soon</p>
             <p className="text-sm text-slate-400">
-              We're working on bringing you detailed financial reports and
+              We&apos;re working on bringing you detailed financial reports and
               insights.
             </p>
           </div>
