@@ -29,30 +29,30 @@ export function AccountsList({
   const isDebt = accounts.length > 0 && accounts[0].type === "debt";
 
   return (
-    <Card className="border border-slate-200/60 shadow-sm bg-white/80 backdrop-blur-sm">
-      <CardHeader className="pb-4">
-        <CardTitle className="text-base font-semibold text-slate-900 flex items-center justify-between">
+    <Card className="rounded-3xl shadow-lg border-0 bg-gradient-to-br from-white to-slate-50/80 backdrop-blur-sm overflow-hidden">
+      <CardHeader className="pb-6">
+        <CardTitle className="text-lg font-semibold text-slate-900 flex items-center justify-between">
           {title}
           {showAddButton && (
             <Button
               size="sm"
               variant="ghost"
-              className="h-8 w-8 p-0 rounded-lg hover:bg-slate-100 transition-colors"
+              className="h-9 w-9 p-0 rounded-xl hover:bg-slate-100/70 hover:shadow-md transition-all duration-300 transform hover:scale-110"
             >
               <Plus className="h-4 w-4 text-slate-600" />
             </Button>
           )}
         </CardTitle>
       </CardHeader>
-      <CardContent className="space-y-3 pt-0">
+      <CardContent className="space-y-4 pt-0">
         {accounts.map((account) => (
           <div
             key={account.name}
-            className="flex items-center justify-between p-3 rounded-lg bg-slate-50/50 hover:bg-slate-100/70 transition-all duration-200 group"
+            className="flex items-center justify-between p-4 rounded-2xl bg-gradient-to-r from-slate-50/80 to-slate-100/60 hover:from-slate-100/90 hover:to-slate-200/70 transition-all duration-300 group hover:shadow-md transform hover:scale-[1.02] border border-slate-200/50"
           >
-            <div className="flex items-center gap-3 min-w-0 flex-1">
+            <div className="flex items-center gap-4 min-w-0 flex-1">
               <div
-                className={`w-2.5 h-2.5 rounded-full ${account.color} flex-shrink-0 shadow-sm`}
+                className={`w-3 h-3 rounded-full ${account.color} flex-shrink-0 shadow-sm ring-2 ring-white`}
               />
               <span
                 className="font-medium text-slate-800 truncate text-sm group-hover:text-slate-900 transition-colors"
@@ -61,19 +61,19 @@ export function AccountsList({
                 {account.name}
               </span>
             </div>
-            <span className="font-semibold text-slate-700 flex-shrink-0 ml-2 text-sm">
+            <span className="font-semibold text-slate-700 flex-shrink-0 ml-3 text-sm">
               {formatCurrency(Math.abs(account.balance))}
             </span>
           </div>
         ))}
         {accounts.length > 0 && (
           <>
-            <Separator className="my-4 bg-slate-200/60" />
+            <Separator className="my-6 bg-slate-300/60" />
             <div
-              className={`flex items-center justify-between p-3 rounded-lg ${
+              className={`flex items-center justify-between p-4 rounded-2xl border-2 transition-all duration-300 ${
                 isDebt
-                  ? "bg-red-50/70 border border-red-100"
-                  : "bg-slate-100/70 border border-slate-200"
+                  ? "bg-gradient-to-r from-red-50/80 to-red-100/60 border-red-200/70"
+                  : "bg-gradient-to-r from-slate-100/80 to-slate-200/60 border-slate-300/70"
               }`}
             >
               <span

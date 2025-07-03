@@ -13,8 +13,8 @@ export function Sidebar({ accounts }: SidebarProps) {
   const debts = accounts.filter((acc) => acc.type === "debt");
 
   return (
-    <div className="hidden lg:block lg:col-span-1">
-      <div className="space-y-6">
+    <div className="hidden lg:block">
+      <div className="space-y-8">
         <Navigation />
 
         {/* Regular budgetable accounts */}

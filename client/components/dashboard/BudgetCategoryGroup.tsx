@@ -29,37 +29,37 @@ export function BudgetCategoryGroup({
   };
 
   return (
-    <Card className="border border-slate-200/60 shadow-sm bg-white/80 backdrop-blur-sm overflow-hidden">
+    <Card className="rounded-3xl shadow-lg border-0 bg-gradient-to-br from-white to-slate-50/80 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:shadow-xl">
       <CardHeader
-        className="pb-4 cursor-pointer hover:bg-slate-50/50 transition-all duration-200 group"
+        className="pb-6 cursor-pointer hover:bg-slate-50/70 transition-all duration-300 group"
         onClick={onToggle}
       >
         <div className="flex items-center justify-between">
-          <CardTitle className="text-base font-semibold text-slate-900 flex items-center gap-3">
+          <CardTitle className="text-lg font-semibold text-slate-900 flex items-center gap-4">
             {isExpanded ? (
-              <ChevronUp className="h-4 w-4 text-slate-600 group-hover:text-slate-800 transition-colors" />
+              <ChevronUp className="h-5 w-5 text-slate-600 group-hover:text-slate-800 transition-colors" />
             ) : (
-              <ChevronDown className="h-4 w-4 text-slate-600 group-hover:text-slate-800 transition-colors" />
+              <ChevronDown className="h-5 w-5 text-slate-600 group-hover:text-slate-800 transition-colors" />
             )}
             {group.name}
             <Badge
-              className="bg-slate-100 text-slate-700 hover:bg-slate-100 font-medium border-0"
+              className="bg-gradient-to-r from-slate-100/80 to-slate-200/60 text-slate-700 hover:from-slate-200/80 hover:to-slate-300/60 font-medium border-0 px-3 py-1 rounded-xl shadow-sm"
               variant="secondary"
             >
               {formatCurrency(groupTotal)}
             </Badge>
           </CardTitle>
-          <div className="hidden sm:flex items-center gap-6 text-xs font-medium text-slate-600">
-            <span className="w-20 text-right">Assigned</span>
-            <span className="w-20 text-right">Activity</span>
-            <span className="w-24 text-right">Available</span>
+          <div className="hidden sm:flex items-center gap-8 text-sm font-medium text-slate-600">
+            <span className="w-24 text-right">Assigned</span>
+            <span className="w-24 text-right">Activity</span>
+            <span className="w-28 text-right">Available</span>
           </div>
         </div>
       </CardHeader>
 
       {isExpanded && (
-        <CardContent className="pt-0 pb-4">
-          <div className="space-y-1">
+        <CardContent className="pt-0 pb-6">
+          <div className="space-y-2">
             {group.categories.map((category) => (
               <BudgetCategory key={category.name} category={category} />
             ))}

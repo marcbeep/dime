@@ -38,6 +38,17 @@ export function Header({
   accountsExpanded,
   setAccountsExpanded,
 }: HeaderProps) {
+  // Filter accounts by type
+  const regularAccounts = accounts.filter((acc) => acc.type === "account");
+  const assets = accounts.filter((acc) => acc.type === "asset");
+  const debts = accounts.filter((acc) => acc.type === "debt");
+
+  // Calculate totals
+  const budgetableTotal = regularAccounts.reduce(
+    (sum, acc) => sum + acc.balance,
+    0
+  );
+
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat("en-GB", {
       style: "currency",
@@ -46,38 +57,26 @@ export function Header({
     }).format(amount);
   };
 
-  // Filter accounts by type
-  const regularAccounts = accounts.filter((acc) => acc.type === "account");
-  const assets = accounts.filter((acc) => acc.type === "asset");
-  const debts = accounts.filter((acc) => acc.type === "debt");
-
-  // Calculate total for budgetable accounts only
-  const budgetableTotal = regularAccounts.reduce(
-    (sum, acc) => sum + acc.balance,
-    0
-  );
-
   const renderAccountSection = (sectionAccounts: Account[], title: string) => {
-    if (sectionAccounts.length === 0) return null;
-
     const sectionTotal = sectionAccounts.reduce(
       (sum, acc) => sum + acc.balance,
       0
     );
-    const isDebt = title === "Debts";
+    const isDebt =
+      sectionAccounts.length > 0 && sectionAccounts[0].type === "debt";
 
     return (
-      <div className="space-y-3">
+      <div className="space-y-4">
         <h4 className="font-semibold text-slate-800 text-sm">{title}</h4>
-        <div className="space-y-2">
+        <div className="space-y-3">
           {sectionAccounts.map((account) => (
             <div
               key={account.name}
-              className="flex items-center justify-between p-3 rounded-lg bg-slate-50"
+              className="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-slate-50/70 to-slate-100/50 hover:from-slate-100/80 hover:to-slate-200/60 transition-all duration-300"
             >
               <div className="flex items-center gap-3 min-w-0 flex-1">
                 <div
-                  className={`w-2.5 h-2.5 rounded-full ${account.color} flex-shrink-0`}
+                  className={`w-3 h-3 rounded-full ${account.color} flex-shrink-0 shadow-sm ring-2 ring-white`}
                 />
                 <span
                   className="font-medium text-slate-800 truncate text-sm"
@@ -93,10 +92,10 @@ export function Header({
           ))}
         </div>
         <div
-          className={`flex items-center justify-between p-3 rounded-lg border ${
+          className={`flex items-center justify-between p-3 rounded-xl border-2 transition-all duration-300 ${
             isDebt
-              ? "bg-red-50 border-red-200"
-              : "bg-slate-100 border-slate-200"
+              ? "bg-gradient-to-r from-red-50/80 to-red-100/60 border-red-200/70"
+              : "bg-gradient-to-r from-slate-100/80 to-slate-200/60 border-slate-300/70"
           }`}
         >
           <span
@@ -119,49 +118,51 @@ export function Header({
   };
 
   const MobileSidebar = () => (
-    <div className="h-full overflow-y-auto bg-white">
-      <div className="space-y-6 p-6">
+    <div className="h-full overflow-y-auto bg-gradient-to-br from-white to-slate-50/80">
+      <div className="space-y-8 p-6">
         {/* User Profile */}
-        <div className="flex items-center gap-3 pb-4 border-b border-slate-200">
-          <Avatar className="h-12 w-12 shadow-sm">
+        <div className="flex items-center gap-4 pb-6 border-b border-slate-200/60">
+          <Avatar className="h-14 w-14 shadow-lg ring-2 ring-white">
             <AvatarImage src="/placeholder-user.jpg" />
-            <AvatarFallback className="bg-slate-600 text-white font-semibold">
+            <AvatarFallback className="bg-gradient-to-r from-slate-600 to-slate-700 text-white font-semibold text-lg">
               J
             </AvatarFallback>
           </Avatar>
           <div>
-            <h2 className="font-semibold text-slate-900">John&apos;s Budget</h2>
+            <h2 className="font-semibold text-slate-900 text-lg">
+              John&apos;s Budget
+            </h2>
             <p className="text-sm text-slate-500">john.doe@university.edu</p>
           </div>
         </div>
 
         {/* Navigation */}
-        <nav className="space-y-2">
+        <nav className="space-y-3">
           <Button
             variant="default"
-            className="w-full justify-start gap-3 h-11 bg-slate-900 hover:bg-slate-800"
+            className="w-full justify-start gap-4 h-12 bg-gradient-to-r from-slate-900 to-slate-800 hover:from-slate-800 hover:to-slate-700 rounded-2xl font-medium"
           >
-            <Target className="h-4 w-4" />
+            <Target className="h-5 w-5" />
             Budget
           </Button>
           <Button
             variant="ghost"
-            className="w-full justify-start gap-3 h-11 hover:bg-slate-100"
+            className="w-full justify-start gap-4 h-12 hover:bg-slate-100/70 rounded-2xl font-medium"
           >
-            <TrendingUp className="h-4 w-4" />
+            <TrendingUp className="h-5 w-5" />
             Reports
           </Button>
           <Button
             variant="ghost"
-            className="w-full justify-start gap-3 h-11 hover:bg-slate-100"
+            className="w-full justify-start gap-4 h-12 hover:bg-slate-100/70 rounded-2xl font-medium"
           >
-            <Wallet className="h-4 w-4" />
+            <Wallet className="h-5 w-5" />
             Accounts
           </Button>
         </nav>
 
         {/* Accounts Sections */}
-        <div className="space-y-6 pb-6">
+        <div className="space-y-8 pb-6">
           {renderAccountSection(regularAccounts, "Accounts")}
           {renderAccountSection(assets, "Assets")}
           {renderAccountSection(debts, "Debts")}
@@ -171,32 +172,36 @@ export function Header({
   );
 
   return (
-    <header className="bg-white/80 backdrop-blur-sm border-b border-slate-200/60 px-4 py-4 lg:px-6 sticky top-0 z-40">
-      <div className="flex items-center justify-between max-w-7xl mx-auto">
-        <div className="flex items-center gap-4">
+    <header className="bg-white/90 backdrop-blur-md border-b border-slate-200/60 px-4 py-6 lg:px-8 sticky top-0 z-40 shadow-sm">
+      <div className="flex items-center justify-between max-w-8xl mx-auto">
+        <div className="flex items-center gap-6">
           {/* Mobile Menu */}
           <Sheet open={mobileMenuOpen} onOpenChange={setMobileMenuOpen}>
             <SheetTrigger asChild className="lg:hidden">
-              <Button variant="ghost" size="icon" className="rounded-lg">
+              <Button
+                variant="ghost"
+                size="icon"
+                className="rounded-xl h-10 w-10"
+              >
                 <Menu className="h-5 w-5" />
               </Button>
             </SheetTrigger>
-            <SheetContent side="left" className="w-80 p-0 border-slate-200">
+            <SheetContent side="left" className="w-80 p-0 border-slate-200/60">
               <SheetTitle className="sr-only">Menu</SheetTitle>
               <MobileSidebar />
             </SheetContent>
           </Sheet>
 
           {/* Desktop User Info */}
-          <div className="hidden lg:flex items-center gap-3">
-            <Avatar className="h-10 w-10 shadow-sm">
+          <div className="hidden lg:flex items-center gap-4">
+            <Avatar className="h-12 w-12 shadow-lg ring-2 ring-white">
               <AvatarImage src="/placeholder-user.jpg" />
-              <AvatarFallback className="bg-slate-600 text-white font-semibold">
+              <AvatarFallback className="bg-gradient-to-r from-slate-600 to-slate-700 text-white font-semibold">
                 J
               </AvatarFallback>
             </Avatar>
             <div>
-              <h1 className="font-semibold text-slate-900">
+              <h1 className="font-semibold text-slate-900 text-lg">
                 John&apos;s Budget
               </h1>
               <p className="text-sm text-slate-500">john.doe@university.edu</p>
@@ -205,54 +210,51 @@ export function Header({
 
           {/* Mobile User Avatar */}
           <div className="lg:hidden">
-            <Avatar className="h-8 w-8 shadow-sm">
+            <Avatar className="h-10 w-10 shadow-md ring-2 ring-white">
               <AvatarImage src="/placeholder-user.jpg" />
-              <AvatarFallback className="bg-slate-600 text-white text-sm font-semibold">
+              <AvatarFallback className="bg-gradient-to-r from-slate-600 to-slate-700 text-white text-sm font-semibold">
                 J
               </AvatarFallback>
             </Avatar>
           </div>
         </div>
 
-        <div className="flex items-center gap-3">
-          {/* Mobile Accounts Quick View */}
-          <div className="lg:hidden">
+        <div className="flex items-center gap-4">
+          <div className="hidden lg:flex items-center gap-4">
             <Collapsible
               open={accountsExpanded}
               onOpenChange={setAccountsExpanded}
             >
               <CollapsibleTrigger asChild>
                 <Button
-                  variant="outline"
-                  size="sm"
-                  className="gap-2 bg-white/80 border-slate-200 hover:bg-white rounded-lg"
+                  variant="ghost"
+                  className="flex items-center gap-2 h-10 px-4 rounded-2xl hover:bg-slate-100/70 transition-all duration-300"
                 >
                   <Wallet className="h-4 w-4" />
-                  {formatCurrency(budgetableTotal)}
-                  <ChevronDown
-                    className={`h-4 w-4 transition-transform ${
-                      accountsExpanded ? "rotate-180" : ""
-                    }`}
-                  />
+                  <span className="font-medium text-slate-700">
+                    {formatCurrency(budgetableTotal)}
+                  </span>
+                  <ChevronDown className="h-4 w-4" />
                 </Button>
               </CollapsibleTrigger>
-              <CollapsibleContent className="absolute right-4 top-16 z-50">
-                <Card className="w-80 shadow-lg border-slate-200 bg-white">
-                  <CardContent className="p-4 space-y-4">
+
+              <CollapsibleContent className="absolute right-4 top-20 z-50">
+                <Card className="w-80 shadow-2xl border-0 bg-gradient-to-br from-white to-slate-50/90 backdrop-blur-md rounded-3xl">
+                  <CardContent className="p-6 space-y-6">
                     {regularAccounts.length > 0 && (
-                      <div className="space-y-3">
-                        <h4 className="font-semibold text-slate-800 text-sm">
+                      <div className="space-y-4">
+                        <h4 className="font-semibold text-slate-800 text-base">
                           Budgetable Accounts
                         </h4>
-                        <div className="space-y-2">
+                        <div className="space-y-3">
                           {regularAccounts.map((account) => (
                             <div
                               key={account.name}
-                              className="flex items-center justify-between p-2 rounded-lg bg-slate-50"
+                              className="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-slate-50/70 to-slate-100/50 hover:from-slate-100/80 hover:to-slate-200/60 transition-all duration-300"
                             >
-                              <div className="flex items-center gap-2 min-w-0 flex-1">
+                              <div className="flex items-center gap-3 min-w-0 flex-1">
                                 <div
-                                  className={`w-2 h-2 rounded-full ${account.color} flex-shrink-0`}
+                                  className={`w-3 h-3 rounded-full ${account.color} flex-shrink-0 shadow-sm ring-2 ring-white`}
                                 />
                                 <span
                                   className="text-sm font-medium truncate"
@@ -267,7 +269,7 @@ export function Header({
                             </div>
                           ))}
                         </div>
-                        <div className="flex items-center justify-between p-2 rounded-lg bg-slate-100 border border-slate-200">
+                        <div className="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-slate-100/80 to-slate-200/60 border-2 border-slate-300/70">
                           <span className="text-sm font-semibold text-slate-800">
                             Total
                           </span>
@@ -279,20 +281,20 @@ export function Header({
                     )}
                     {assets.length > 0 && (
                       <>
-                        <Separator className="bg-slate-200" />
-                        <div className="space-y-3">
-                          <h4 className="font-semibold text-slate-800 text-sm">
+                        <Separator className="bg-slate-300/60" />
+                        <div className="space-y-4">
+                          <h4 className="font-semibold text-slate-800 text-base">
                             Assets
                           </h4>
-                          <div className="space-y-2">
+                          <div className="space-y-3">
                             {assets.map((account) => (
                               <div
                                 key={account.name}
-                                className="flex items-center justify-between p-2 rounded-lg bg-slate-50"
+                                className="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-slate-50/70 to-slate-100/50 hover:from-slate-100/80 hover:to-slate-200/60 transition-all duration-300"
                               >
-                                <div className="flex items-center gap-2 min-w-0 flex-1">
+                                <div className="flex items-center gap-3 min-w-0 flex-1">
                                   <div
-                                    className={`w-2 h-2 rounded-full ${account.color} flex-shrink-0`}
+                                    className={`w-3 h-3 rounded-full ${account.color} flex-shrink-0 shadow-sm ring-2 ring-white`}
                                   />
                                   <span
                                     className="text-sm font-medium truncate"
@@ -312,20 +314,20 @@ export function Header({
                     )}
                     {debts.length > 0 && (
                       <>
-                        <Separator className="bg-slate-200" />
-                        <div className="space-y-3">
-                          <h4 className="font-semibold text-slate-800 text-sm">
+                        <Separator className="bg-slate-300/60" />
+                        <div className="space-y-4">
+                          <h4 className="font-semibold text-slate-800 text-base">
                             Debts
                           </h4>
-                          <div className="space-y-2">
+                          <div className="space-y-3">
                             {debts.map((account) => (
                               <div
                                 key={account.name}
-                                className="flex items-center justify-between p-2 rounded-lg bg-slate-50"
+                                className="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-slate-50/70 to-slate-100/50 hover:from-slate-100/80 hover:to-slate-200/60 transition-all duration-300"
                               >
-                                <div className="flex items-center gap-2 min-w-0 flex-1">
+                                <div className="flex items-center gap-3 min-w-0 flex-1">
                                   <div
-                                    className={`w-2 h-2 rounded-full ${account.color} flex-shrink-0`}
+                                    className={`w-3 h-3 rounded-full ${account.color} flex-shrink-0 shadow-sm ring-2 ring-white`}
                                   />
                                   <span
                                     className="text-sm font-medium truncate"
@@ -352,12 +354,16 @@ export function Header({
           <Button
             variant="outline"
             size="sm"
-            className="hidden lg:flex bg-white/80 border-slate-200 hover:bg-white rounded-lg"
+            className="hidden lg:flex bg-white/80 border-slate-200/60 hover:bg-white rounded-2xl h-10 font-medium shadow-sm hover:shadow-md transition-all duration-300"
           >
             <Settings className="h-4 w-4 mr-2" />
             Settings
           </Button>
-          <Button variant="ghost" size="icon" className="lg:hidden rounded-lg">
+          <Button
+            variant="ghost"
+            size="icon"
+            className="lg:hidden rounded-xl h-10 w-10"
+          >
             <Settings className="h-4 w-4" />
           </Button>
         </div>

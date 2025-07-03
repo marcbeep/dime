@@ -16,15 +16,13 @@ export function MainContent({
   onToggleCategory,
 }: MainContentProps) {
   return (
-    <div className="lg:col-span-3">
-      <div className="space-y-6">
-        <MonthSelector readyToAssign={readyToAssign} />
-        <BudgetCategories
-          categoryGroups={categoryGroups}
-          expandedCategories={expandedCategories}
-          onToggleCategory={onToggleCategory}
-        />
-      </div>
+    <div className="space-y-8">
+      <MonthSelector readyToAssign={readyToAssign} />
+      <BudgetCategories
+        categoryGroups={categoryGroups}
+        expandedCategories={expandedCategories}
+        onToggleCategory={onToggleCategory}
+      />
     </div>
   );
 }

@@ -17,18 +17,23 @@ export default function Dashboard() {
     {
       name: "Checking",
       balance: 1200.0,
-      color: "bg-blue-500",
+      color: "bg-brand-blue",
       type: "account",
     },
-    { name: "Venmo", balance: 100.0, color: "bg-purple-500", type: "account" },
-    { name: "Cash", balance: 100.0, color: "bg-amber-500", type: "account" },
+    {
+      name: "Venmo",
+      balance: 100.0,
+      color: "bg-brand-purple",
+      type: "account",
+    },
+    { name: "Cash", balance: 100.0, color: "bg-brand-yellow", type: "account" },
 
     // Assets (non-budgetable)
-    { name: "Savings", balance: 600.0, color: "bg-emerald-500", type: "asset" },
+    { name: "Savings", balance: 600.0, color: "bg-brand-green", type: "asset" },
     {
       name: "Investment Account",
       balance: 2500.0,
-      color: "bg-green-500",
+      color: "bg-emerald-500",
       type: "asset",
     },
     {
@@ -39,7 +44,12 @@ export default function Dashboard() {
     },
 
     // Debts
-    { name: "Credit Card", balance: -450.0, color: "bg-red-500", type: "debt" },
+    {
+      name: "Credit Card",
+      balance: -450.0,
+      color: "bg-brand-red",
+      type: "debt",
+    },
     {
       name: "Student Loan",
       balance: -5000.0,
@@ -51,7 +61,7 @@ export default function Dashboard() {
   const categoryGroups: CategoryGroup[] = [
     {
       id: "savings",
-      name: "Savings",
+      name: "Savings Goals",
       categories: [
         {
           name: "Emergency Fund",
@@ -241,7 +251,7 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100/50">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100/30">
       <Header
         accounts={accounts}
         mobileMenuOpen={mobileMenuOpen}
@@ -250,15 +260,19 @@ export default function Dashboard() {
         setAccountsExpanded={setAccountsExpanded}
       />
 
-      <div className="max-w-7xl mx-auto px-4 py-6 lg:px-6 lg:py-8">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
-          <Sidebar accounts={accounts} />
-          <MainContent
-            readyToAssign={readyToAssign}
-            categoryGroups={categoryGroups}
-            expandedCategories={expandedCategories}
-            onToggleCategory={toggleCategory}
-          />
+      <div className="max-w-8xl mx-auto px-4 py-8 lg:px-8 lg:py-12">
+        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
+          <div className="lg:col-span-1">
+            <Sidebar accounts={accounts} />
+          </div>
+          <div className="lg:col-span-4">
+            <MainContent
+              readyToAssign={readyToAssign}
+              categoryGroups={categoryGroups}
+              expandedCategories={expandedCategories}
+              onToggleCategory={toggleCategory}
+            />
+          </div>
         </div>
       </div>
     </div>
