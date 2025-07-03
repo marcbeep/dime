@@ -13,7 +13,7 @@ import {
   calculateBudgetMetrics,
   getDefaultExpandedCategories,
 } from "@/components/dashboard/utils";
-import { fetchBudgetData } from "../lib/budget-utils";
+import { fetchBudgetData } from "@/lib/budget-utils";
 
 export default function Dashboard() {
   const [budgetData, setBudgetData] = useState<BudgetData | null>(null);

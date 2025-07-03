@@ -10,7 +10,7 @@ import {
   Heart,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { formatAmount } from "../../lib/utils";
+import { formatAmount } from "@/lib/utils";
 
 export function HeroSection() {
   return (
