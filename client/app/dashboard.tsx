@@ -261,11 +261,11 @@ export default function Dashboard() {
       />
 
       <div className="max-w-8xl mx-auto px-4 py-8 lg:px-8 lg:py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-5 gap-8 lg:gap-12">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-10">
           <div className="lg:col-span-1">
             <Sidebar accounts={accounts} />
           </div>
-          <div className="lg:col-span-4">
+          <div className="lg:col-span-3">
             <MainContent
               readyToAssign={readyToAssign}
               categoryGroups={categoryGroups}
