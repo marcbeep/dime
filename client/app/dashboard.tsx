@@ -10,10 +10,10 @@ import {
 import { Footer } from "@/components/ui/footer";
 import { BudgetData, BudgetCalculations } from "@/components/dashboard/types";
 import {
-  fetchBudgetData,
   calculateBudgetMetrics,
   getDefaultExpandedCategories,
-} from "../lib/budget-utils";
+} from "@/components/dashboard/utils";
+import { fetchBudgetData } from "../lib/budget-utils";
 
 export default function Dashboard() {
   const [budgetData, setBudgetData] = useState<BudgetData | null>(null);
