@@ -32,12 +32,16 @@ interface HeaderProps {
   accounts: Account[];
   mobileMenuOpen: boolean;
   setMobileMenuOpen: (open: boolean) => void;
+  activeView: "budget" | "accounts" | "reports";
+  onViewChange: (view: "budget" | "accounts" | "reports") => void;
 }
 
 export function Header({
   accounts,
   mobileMenuOpen,
   setMobileMenuOpen,
+  activeView,
+  onViewChange,
 }: HeaderProps) {
   // Filter accounts by type using centralized utility
   const regularAccounts = filterAccountsByType(accounts, "account");
@@ -126,22 +130,46 @@ export function Header({
         {/* Navigation */}
         <nav className="space-y-3">
           <Button
-            variant="default"
-            className="w-full justify-start gap-4 h-12 bg-gradient-to-r from-slate-900 to-slate-800 hover:from-slate-800 hover:to-slate-700 rounded-2xl font-medium"
+            variant={activeView === "budget" ? "default" : "ghost"}
+            onClick={() => {
+              onViewChange("budget");
+              setMobileMenuOpen(false);
+            }}
+            className={`w-full justify-start gap-4 h-12 rounded-2xl font-medium transition-all duration-300 ${
+              activeView === "budget"
+                ? "bg-gradient-to-r from-slate-900 to-slate-800 hover:from-slate-800 hover:to-slate-700 text-white"
+                : "hover:bg-slate-100/70 text-slate-700 hover:text-slate-900"
+            }`}
           >
             <Target className="h-5 w-5" />
             Budget
           </Button>
           <Button
-            variant="ghost"
-            className="w-full justify-start gap-4 h-12 hover:bg-slate-100/70 rounded-2xl font-medium"
+            variant={activeView === "reports" ? "default" : "ghost"}
+            onClick={() => {
+              onViewChange("reports");
+              setMobileMenuOpen(false);
+            }}
+            className={`w-full justify-start gap-4 h-12 rounded-2xl font-medium transition-all duration-300 ${
+              activeView === "reports"
+                ? "bg-gradient-to-r from-slate-900 to-slate-800 hover:from-slate-800 hover:to-slate-700 text-white"
+                : "hover:bg-slate-100/70 text-slate-700 hover:text-slate-900"
+            }`}
           >
             <TrendingUp className="h-5 w-5" />
             Reports
           </Button>
           <Button
-            variant="ghost"
-            className="w-full justify-start gap-4 h-12 hover:bg-slate-100/70 rounded-2xl font-medium"
+            variant={activeView === "accounts" ? "default" : "ghost"}
+            onClick={() => {
+              onViewChange("accounts");
+              setMobileMenuOpen(false);
+            }}
+            className={`w-full justify-start gap-4 h-12 rounded-2xl font-medium transition-all duration-300 ${
+              activeView === "accounts"
+                ? "bg-gradient-to-r from-slate-900 to-slate-800 hover:from-slate-800 hover:to-slate-700 text-white"
+                : "hover:bg-slate-100/70 text-slate-700 hover:text-slate-900"
+            }`}
           >
             <Wallet className="h-5 w-5" />
             Accounts

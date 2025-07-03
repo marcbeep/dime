@@ -5,9 +5,11 @@ import { filterAccountsByType } from "@/lib/budget-utils";
 
 interface SidebarProps {
   accounts: Account[];
+  activeView: "budget" | "accounts" | "reports";
+  onViewChange: (view: "budget" | "accounts" | "reports") => void;
 }
 
-export function Sidebar({ accounts }: SidebarProps) {
+export function Sidebar({ accounts, activeView, onViewChange }: SidebarProps) {
   // Filter accounts by type using centralized utility
   const regularAccounts = filterAccountsByType(accounts, "account");
   const assets = filterAccountsByType(accounts, "asset");
@@ -16,7 +18,7 @@ export function Sidebar({ accounts }: SidebarProps) {
   return (
     <div className="hidden lg:block">
       <div className="space-y-8">
-        <Navigation />
+        <Navigation activeView={activeView} onViewChange={onViewChange} />
 
         {/* Regular budgetable accounts */}
         {regularAccounts.length > 0 && (

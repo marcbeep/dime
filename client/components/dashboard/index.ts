@@ -7,3 +7,5 @@ export { BudgetCategoryGroup } from "./BudgetCategoryGroup";
 export { BudgetCategories } from "./BudgetCategories";
 export { Sidebar } from "./Sidebar";
 export { MainContent } from "./MainContent";
+export { TransactionsList } from "./TransactionsList";
+export * from "./types";

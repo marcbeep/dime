@@ -43,7 +43,7 @@ export function BudgetCategoryGroup({
   };
 
   return (
-    <Card className="rounded-3xl shadow-lg border-0 bg-gradient-to-br from-white to-slate-50/80 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:shadow-xl">
+    <Card className="rounded-3xl shadow-lg border-0 bg-gradient-to-br from-white to-slate-50/80 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:shadow-xl min-h-[120px]">
       <CardHeader
         className="pb-6 cursor-pointer hover:bg-slate-50/70 transition-all duration-300 group"
         onClick={onToggle}
@@ -71,15 +71,19 @@ export function BudgetCategoryGroup({
         </div>
       </CardHeader>
 
-      {isExpanded && (
-        <CardContent className="pt-0 pb-6">
-          <div className="space-y-2">
-            {group.categories.map((category) => (
-              <BudgetCategory key={category.name} category={category} />
-            ))}
-          </div>
-        </CardContent>
-      )}
+      <CardContent
+        className={`pt-0 pb-6 transition-all duration-300 ease-in-out ${
+          isExpanded
+            ? "max-h-[1000px] opacity-100"
+            : "max-h-0 opacity-0 overflow-hidden pb-0"
+        }`}
+      >
+        <div className="space-y-2">
+          {group.categories.map((category) => (
+            <BudgetCategory key={category.name} category={category} />
+          ))}
+        </div>
+      </CardContent>
     </Card>
   );
 }

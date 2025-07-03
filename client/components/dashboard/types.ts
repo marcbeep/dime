@@ -49,11 +49,25 @@ export interface Budget {
   updatedAt: string;
 }
 
+export interface Transaction {
+  id: string;
+  accountId: string;
+  date: string;
+  payee: string;
+  category: string | null;
+  amount: number;
+  type: "inflow" | "outflow";
+  memo: string;
+  cleared: boolean;
+  createdAt: string;
+}
+
 export interface BudgetData {
   user: User;
   accounts: Account[];
   categoryGroups: CategoryGroup[];
   budget: Budget;
+  transactions: Transaction[];
   meta: {
     version: string;
     lastSync: string;
