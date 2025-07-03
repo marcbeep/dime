@@ -1,20 +1,71 @@
 export interface Category {
+  id: string;
   name: string;
   assigned: number;
   activity: number;
   available: number;
   status: string;
+  sortOrder: number;
+  createdAt: string;
+  updatedAt: string;
 }
 
 export interface CategoryGroup {
   id: string;
   name: string;
+  sortOrder: number;
+  isExpanded: boolean;
+  createdAt: string;
+  updatedAt: string;
   categories: Category[];
 }
 
 export interface Account {
+  id: string;
   name: string;
   balance: number;
   color: string;
   type: "account" | "asset" | "debt";
+  isActive: boolean;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface User {
+  id: string;
+  name: string;
+  email: string;
+  currency: string;
+  timezone: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface Budget {
+  id: string;
+  userId: string;
+  month: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface BudgetData {
+  user: User;
+  accounts: Account[];
+  categoryGroups: CategoryGroup[];
+  budget: Budget;
+  meta: {
+    version: string;
+    lastSync: string;
+    currency: string;
+  };
+}
+
+export interface BudgetCalculations {
+  totalBudgetable: number;
+  totalAssigned: number;
+  readyToAssign: number;
+  totalAssets: number;
+  totalDebts: number;
+  netWorth: number;
 }

@@ -1,16 +1,17 @@
 import { Navigation } from "./Navigation";
 import { AccountsList } from "./AccountsList";
 import { Account } from "./types";
+import { filterAccountsByType } from "@/lib/budget-utils";
 
 interface SidebarProps {
   accounts: Account[];
 }
 
 export function Sidebar({ accounts }: SidebarProps) {
-  // Filter accounts by type
-  const regularAccounts = accounts.filter((acc) => acc.type === "account");
-  const assets = accounts.filter((acc) => acc.type === "asset");
-  const debts = accounts.filter((acc) => acc.type === "debt");
+  // Filter accounts by type using centralized utility
+  const regularAccounts = filterAccountsByType(accounts, "account");
+  const assets = filterAccountsByType(accounts, "asset");
+  const debts = filterAccountsByType(accounts, "debt");
 
   return (
     <div className="hidden lg:block">

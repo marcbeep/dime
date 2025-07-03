@@ -3,6 +3,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Separator } from "@/components/ui/separator";
 import { Account } from "./types";
+import { formatCurrency } from "@/lib/budget-utils";
 
 interface AccountsListProps {
   accounts: Account[];
@@ -15,14 +16,6 @@ export function AccountsList({
   title,
   showAddButton = true,
 }: AccountsListProps) {
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat("en-GB", {
-      style: "currency",
-      currency: "GBP",
-      minimumFractionDigits: 2,
-    }).format(amount);
-  };
-
   const totalBalance = accounts.reduce((sum, acc) => sum + acc.balance, 0);
 
   // Determine styling based on account type
@@ -47,7 +40,7 @@ export function AccountsList({
       <CardContent className="space-y-4 pt-0">
         {accounts.map((account) => (
           <div
-            key={account.name}
+            key={account.id}
             className="flex items-center justify-between p-4 rounded-2xl bg-gradient-to-r from-slate-50/80 to-slate-100/60 hover:from-slate-100/90 hover:to-slate-200/70 transition-all duration-300 group hover:shadow-md transform hover:scale-[1.02] border border-slate-200/50"
           >
             <div className="flex items-center gap-4 min-w-0 flex-1">

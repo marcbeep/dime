@@ -1,245 +1,52 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { Header, Sidebar, MainContent } from "@/components/dashboard";
-import { Account, CategoryGroup } from "@/components/dashboard/types";
+import { BudgetData, BudgetCalculations } from "@/components/dashboard/types";
+import {
+  fetchBudgetData,
+  calculateBudgetMetrics,
+  getDefaultExpandedCategories,
+} from "@/lib/budget-utils";
 
 export default function Dashboard() {
-  const [expandedCategories, setExpandedCategories] = useState<string[]>([
-    "savings",
-    "obligations",
-  ]);
+  const [budgetData, setBudgetData] = useState<BudgetData | null>(null);
+  const [calculations, setCalculations] = useState<BudgetCalculations | null>(
+    null
+  );
+  const [expandedCategories, setExpandedCategories] = useState<string[]>([]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
+  const [isLoading, setIsLoading] = useState(true);
+  const [error, setError] = useState<string | null>(null);
 
-  const accounts: Account[] = [
-    // Regular budgetable accounts
-    {
-      name: "Checking",
-      balance: 1200.0,
-      color: "bg-brand-blue",
-      type: "account",
-    },
-    {
-      name: "Venmo",
-      balance: 100.0,
-      color: "bg-brand-purple",
-      type: "account",
-    },
-    { name: "Cash", balance: 100.0, color: "bg-brand-yellow", type: "account" },
+  useEffect(() => {
+    async function loadBudgetData() {
+      try {
+        setIsLoading(true);
+        setError(null);
 
-    // Assets (non-budgetable)
-    { name: "Savings", balance: 600.0, color: "bg-brand-green", type: "asset" },
-    {
-      name: "Investment Account",
-      balance: 2500.0,
-      color: "bg-emerald-500",
-      type: "asset",
-    },
-    {
-      name: "Emergency Fund",
-      balance: 1000.0,
-      color: "bg-teal-500",
-      type: "asset",
-    },
+        const data = await fetchBudgetData();
+        const metrics = calculateBudgetMetrics(
+          data.accounts,
+          data.categoryGroups
+        );
+        const defaultExpanded = getDefaultExpandedCategories(
+          data.categoryGroups
+        );
 
-    // Debts
-    {
-      name: "Credit Card",
-      balance: -450.0,
-      color: "bg-brand-red",
-      type: "debt",
-    },
-    {
-      name: "Student Loan",
-      balance: -5000.0,
-      color: "bg-orange-500",
-      type: "debt",
-    },
-  ];
+        setBudgetData(data);
+        setCalculations(metrics);
+        setExpandedCategories(defaultExpanded);
+      } catch (err) {
+        console.error("Failed to load budget data:", err);
+        setError("Failed to load budget data. Please try again.");
+      } finally {
+        setIsLoading(false);
+      }
+    }
 
-  const categoryGroups: CategoryGroup[] = [
-    {
-      id: "savings",
-      name: "Savings Goals",
-      categories: [
-        {
-          name: "Emergency Fund",
-          assigned: 100,
-          activity: 0,
-          available: 100,
-          status: "good",
-        },
-        {
-          name: "Spring Break Fund",
-          assigned: 50,
-          activity: 0,
-          available: 50,
-          status: "good",
-        },
-        {
-          name: "Graduation Trip",
-          assigned: 50,
-          activity: 0,
-          available: 50,
-          status: "good",
-        },
-      ],
-    },
-    {
-      id: "obligations",
-      name: "Monthly Bills",
-      categories: [
-        {
-          name: "Rent",
-          assigned: 700,
-          activity: 700,
-          available: 0,
-          status: "good",
-        },
-        {
-          name: "Utilities",
-          assigned: 60,
-          activity: 60,
-          available: 0,
-          status: "good",
-        },
-        {
-          name: "Internet",
-          assigned: 30,
-          activity: 30,
-          available: 0,
-          status: "good",
-        },
-        {
-          name: "Phone",
-          assigned: 20,
-          activity: 20,
-          available: 0,
-          status: "good",
-        },
-      ],
-    },
-    {
-      id: "subscriptions",
-      name: "Subscriptions",
-      categories: [
-        {
-          name: "Spotify",
-          assigned: 10,
-          activity: 10,
-          available: 0,
-          status: "good",
-        },
-        {
-          name: "Netflix",
-          assigned: 10,
-          activity: 10,
-          available: 0,
-          status: "good",
-        },
-        {
-          name: "Amazon Prime",
-          assigned: 5,
-          activity: 5,
-          available: 0,
-          status: "good",
-        },
-        {
-          name: "Gym",
-          assigned: 20,
-          activity: 20,
-          available: 0,
-          status: "good",
-        },
-      ],
-    },
-    {
-      id: "education",
-      name: "Education",
-      categories: [
-        {
-          name: "Textbooks",
-          assigned: 50,
-          activity: 0,
-          available: 50,
-          status: "good",
-        },
-        {
-          name: "Supplies",
-          assigned: 20,
-          activity: 0,
-          available: 20,
-          status: "good",
-        },
-        {
-          name: "Printing",
-          assigned: 10,
-          activity: 0,
-          available: 10,
-          status: "good",
-        },
-      ],
-    },
-    {
-      id: "lifestyle",
-      name: "Lifestyle",
-      categories: [
-        {
-          name: "Groceries",
-          assigned: 200,
-          activity: 120,
-          available: 80,
-          status: "good",
-        },
-        {
-          name: "Dining Out",
-          assigned: 100,
-          activity: 60,
-          available: 40,
-          status: "good",
-        },
-        {
-          name: "Coffee",
-          assigned: 30,
-          activity: 20,
-          available: 10,
-          status: "good",
-        },
-        {
-          name: "Entertainment",
-          assigned: 40,
-          activity: 20,
-          available: 20,
-          status: "good",
-        },
-        {
-          name: "Shopping",
-          assigned: 40,
-          activity: 20,
-          available: 20,
-          status: "good",
-        },
-      ],
-    },
-  ];
-
-  // Calculate total budgetable money (only from "account" type)
-  const budgetableAccounts = accounts.filter((acc) => acc.type === "account");
-  const totalBudgetable = budgetableAccounts.reduce(
-    (sum, acc) => sum + acc.balance,
-    0
-  );
-
-  // Calculate how much has been assigned in budget categories
-  const totalAssigned = categoryGroups.reduce(
-    (sum, group) =>
-      sum +
-      group.categories.reduce((groupSum, cat) => groupSum + cat.assigned, 0),
-    0
-  );
-
-  // Ready to assign = total budgetable money - money already assigned
-  const readyToAssign = totalBudgetable - totalAssigned;
+    loadBudgetData();
+  }, []);
 
   const toggleCategory = (categoryId: string) => {
     setExpandedCategories((prev) =>
@@ -249,10 +56,44 @@ export default function Dashboard() {
     );
   };
 
+  // Loading state
+  if (isLoading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100/20 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-8 h-8 border-4 border-slate-300 border-t-slate-900 rounded-full animate-spin mx-auto mb-4"></div>
+          <p className="text-slate-600">Loading your budget...</p>
+        </div>
+      </div>
+    );
+  }
+
+  // Error state
+  if (error || !budgetData || !calculations) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100/20 flex items-center justify-center">
+        <div className="text-center">
+          <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
+            <span className="text-red-600 text-2xl">⚠️</span>
+          </div>
+          <p className="text-slate-600 mb-4">
+            {error || "Something went wrong loading your budget."}
+          </p>
+          <button
+            onClick={() => window.location.reload()}
+            className="px-4 py-2 bg-slate-900 text-white rounded-lg hover:bg-slate-800 transition-colors"
+          >
+            Try Again
+          </button>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100/20">
       <Header
-        accounts={accounts}
+        accounts={budgetData.accounts}
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
       />
@@ -260,12 +101,12 @@ export default function Dashboard() {
       <div className="max-w-8xl mx-auto px-4 py-4 lg:px-6 lg:py-6">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
           <div className="lg:col-span-1">
-            <Sidebar accounts={accounts} />
+            <Sidebar accounts={budgetData.accounts} />
           </div>
           <div className="lg:col-span-3">
             <MainContent
-              readyToAssign={readyToAssign}
-              categoryGroups={categoryGroups}
+              readyToAssign={calculations.readyToAssign}
+              categoryGroups={budgetData.categoryGroups}
               expandedCategories={expandedCategories}
               onToggleCategory={toggleCategory}
             />

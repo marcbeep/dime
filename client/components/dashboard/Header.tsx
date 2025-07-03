@@ -26,6 +26,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Account } from "./types";
+import { filterAccountsByType, formatCurrency } from "@/lib/budget-utils";
 
 interface HeaderProps {
   accounts: Account[];
@@ -38,18 +39,10 @@ export function Header({
   mobileMenuOpen,
   setMobileMenuOpen,
 }: HeaderProps) {
-  // Filter accounts by type
-  const regularAccounts = accounts.filter((acc) => acc.type === "account");
-  const assets = accounts.filter((acc) => acc.type === "asset");
-  const debts = accounts.filter((acc) => acc.type === "debt");
-
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat("en-GB", {
-      style: "currency",
-      currency: "GBP",
-      minimumFractionDigits: 2,
-    }).format(amount);
-  };
+  // Filter accounts by type using centralized utility
+  const regularAccounts = filterAccountsByType(accounts, "account");
+  const assets = filterAccountsByType(accounts, "asset");
+  const debts = filterAccountsByType(accounts, "debt");
 
   const renderAccountSection = (sectionAccounts: Account[], title: string) => {
     const sectionTotal = sectionAccounts.reduce(
@@ -65,7 +58,7 @@ export function Header({
         <div className="space-y-3">
           {sectionAccounts.map((account) => (
             <div
-              key={account.name}
+              key={account.id}
               className="flex items-center justify-between p-3 rounded-xl bg-gradient-to-r from-slate-50/70 to-slate-100/50 hover:from-slate-100/80 hover:to-slate-200/60 transition-all duration-300"
             >
               <div className="flex items-center gap-3 min-w-0 flex-1">
@@ -198,92 +191,48 @@ export function Header({
         </div>
 
         {/* Right Side - User Profile Dropdown */}
-        <div className="flex items-center">
-          {/* Desktop User Profile Dropdown */}
-          <div className="hidden lg:flex">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className="flex items-center gap-2 h-10 px-3 rounded-lg hover:bg-slate-100/70 transition-all duration-200"
-                >
-                  <Avatar className="h-7 w-7 shadow-sm ring-1 ring-white">
-                    <AvatarImage src="/placeholder-user.jpg" />
-                    <AvatarFallback className="bg-gradient-to-r from-slate-600 to-slate-700 text-white text-xs font-semibold">
-                      J
-                    </AvatarFallback>
-                  </Avatar>
-                  <div className="text-left">
-                    <div className="font-medium text-slate-900 text-sm">
-                      John&apos;s Budget
-                    </div>
-                    <div className="text-xs text-slate-500">
-                      john.doe@university.edu
-                    </div>
-                  </div>
-                  <ChevronDown className="h-3 w-3 text-slate-400" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56" align="end">
-                <DropdownMenuLabel className="text-xs font-medium text-slate-600">
-                  My Account
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem className="text-sm">
-                  <User className="mr-2 h-4 w-4" />
-                  Profile
-                </DropdownMenuItem>
-                <DropdownMenuItem className="text-sm">
-                  <Settings className="mr-2 h-4 w-4" />
-                  Settings
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem className="text-sm">
-                  <LogOut className="mr-2 h-4 w-4" />
-                  Log out
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
-
-          {/* Mobile User Profile Dropdown */}
-          <div className="lg:hidden">
-            <DropdownMenu>
-              <DropdownMenuTrigger asChild>
-                <Button
-                  variant="ghost"
-                  className="flex items-center gap-2 h-10 px-2 rounded-lg hover:bg-slate-100/70 transition-all duration-200"
-                >
-                  <Avatar className="h-7 w-7 shadow-sm ring-1 ring-white">
-                    <AvatarImage src="/placeholder-user.jpg" />
-                    <AvatarFallback className="bg-gradient-to-r from-slate-600 to-slate-700 text-white text-xs font-semibold">
-                      J
-                    </AvatarFallback>
-                  </Avatar>
-                  <ChevronDown className="h-3 w-3 text-slate-400" />
-                </Button>
-              </DropdownMenuTrigger>
-              <DropdownMenuContent className="w-56" align="end">
-                <DropdownMenuLabel className="text-xs font-medium text-slate-600">
-                  My Account
-                </DropdownMenuLabel>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem className="text-sm">
-                  <User className="mr-2 h-4 w-4" />
-                  Profile
-                </DropdownMenuItem>
-                <DropdownMenuItem className="text-sm">
-                  <Settings className="mr-2 h-4 w-4" />
-                  Settings
-                </DropdownMenuItem>
-                <DropdownMenuSeparator />
-                <DropdownMenuItem className="text-sm">
-                  <LogOut className="mr-2 h-4 w-4" />
-                  Log out
-                </DropdownMenuItem>
-              </DropdownMenuContent>
-            </DropdownMenu>
-          </div>
+        <div className="flex items-center gap-2 lg:gap-4">
+          <DropdownMenu>
+            <DropdownMenuTrigger asChild>
+              <Button
+                variant="ghost"
+                className="flex items-center gap-2 lg:gap-3 h-9 lg:h-10 px-2 lg:px-3 rounded-xl hover:bg-slate-100/70 transition-all duration-200"
+              >
+                <Avatar className="h-6 w-6 lg:h-8 lg:w-8 shadow-sm">
+                  <AvatarImage src="/placeholder-user.jpg" />
+                  <AvatarFallback className="bg-gradient-to-r from-slate-600 to-slate-700 text-white font-medium text-xs lg:text-sm">
+                    J
+                  </AvatarFallback>
+                </Avatar>
+                <span className="hidden sm:inline font-medium text-slate-700 text-sm lg:text-base">
+                  John
+                </span>
+                <ChevronDown className="h-3 w-3 lg:h-4 lg:w-4 text-slate-500" />
+              </Button>
+            </DropdownMenuTrigger>
+            <DropdownMenuContent
+              align="end"
+              className="w-56 rounded-2xl shadow-lg border-slate-200/60 bg-white/95 backdrop-blur-sm"
+            >
+              <DropdownMenuLabel className="font-medium text-slate-900">
+                My Account
+              </DropdownMenuLabel>
+              <DropdownMenuSeparator className="bg-slate-200/60" />
+              <DropdownMenuItem className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-100/70 transition-colors cursor-pointer">
+                <User className="h-4 w-4 text-slate-600" />
+                <span className="font-medium text-slate-700">Profile</span>
+              </DropdownMenuItem>
+              <DropdownMenuItem className="flex items-center gap-3 p-3 rounded-xl hover:bg-slate-100/70 transition-colors cursor-pointer">
+                <Settings className="h-4 w-4 text-slate-600" />
+                <span className="font-medium text-slate-700">Settings</span>
+              </DropdownMenuItem>
+              <DropdownMenuSeparator className="bg-slate-200/60" />
+              <DropdownMenuItem className="flex items-center gap-3 p-3 rounded-xl hover:bg-red-50/70 transition-colors cursor-pointer text-red-600">
+                <LogOut className="h-4 w-4" />
+                <span className="font-medium">Log out</span>
+              </DropdownMenuItem>
+            </DropdownMenuContent>
+          </DropdownMenu>
         </div>
       </div>
     </header>

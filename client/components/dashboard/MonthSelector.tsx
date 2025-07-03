@@ -1,20 +1,13 @@
 import { Plus, DollarSign, Minus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
+import { formatCurrency } from "@/lib/budget-utils";
 
 interface MonthSelectorProps {
   readyToAssign: number;
 }
 
 export function MonthSelector({ readyToAssign }: MonthSelectorProps) {
-  const formatCurrency = (amount: number) => {
-    return new Intl.NumberFormat("en-GB", {
-      style: "currency",
-      currency: "GBP",
-      minimumFractionDigits: 2,
-    }).format(amount);
-  };
-
   const handleAddTransaction = () => {
     // TODO: Implement add transaction logic
     console.log("Add transaction");
