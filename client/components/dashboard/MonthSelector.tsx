@@ -58,63 +58,60 @@ export function MonthSelector({ readyToAssign }: MonthSelectorProps) {
   const textStyles = getTextStyling();
 
   return (
-    <div className="space-y-6">
+    <div className="space-y-4">
       {/* Top Action Bar */}
-      <div className="flex flex-col sm:flex-row gap-4 sm:items-center sm:justify-between">
+      <div className="flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
         <Button
           onClick={handleAddTransaction}
-          className="w-full sm:w-auto bg-gradient-to-r from-slate-900 to-slate-800 hover:from-slate-800 hover:to-slate-700 text-white font-medium shadow-lg hover:shadow-xl border-0 h-12 px-8 rounded-2xl transition-all duration-300 transform hover:scale-[1.02] hover:-translate-y-0.5"
+          className="w-full sm:w-auto bg-gradient-to-r from-slate-900 to-slate-800 hover:from-slate-800 hover:to-slate-700 text-white font-medium shadow-md hover:shadow-lg border-0 h-10 px-6 rounded-xl transition-all duration-200 transform hover:scale-[1.02]"
         >
-          <Plus className="h-5 w-5 mr-3" />
+          <Plus className="h-4 w-4 mr-2" />
           Add Transaction
         </Button>
-
-        {/* Month Navigation - Could be added later */}
-        <div className="hidden sm:flex items-center gap-2 text-sm text-slate-600">
-          <span className="font-medium">December 2024</span>
-        </div>
       </div>
 
-      {/* Ready to Assign Card - Full Width */}
+      {/* Ready to Assign Card - Compact */}
       <Card
-        className={`border-0 shadow-lg rounded-3xl overflow-hidden ${getCardStyling()}`}
+        className={`border-0 shadow-sm rounded-2xl overflow-hidden ${getCardStyling()}`}
       >
-        <CardContent className="p-6 lg:p-8">
-          <div className="flex flex-col lg:flex-row lg:items-center lg:justify-between gap-6">
+        <CardContent className="p-4 lg:p-5">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
             {/* Amount Display */}
-            <div className="text-center lg:text-left">
-              <p className={`text-sm font-medium mb-2 ${textStyles.label}`}>
+            <div className="flex-1 text-center sm:text-left">
+              <p
+                className={`text-xs font-medium mb-1 ${textStyles.label} uppercase tracking-wide`}
+              >
                 Ready to Assign
               </p>
               <p
-                className={`text-4xl lg:text-5xl font-bold ${textStyles.amount}`}
+                className={`text-2xl lg:text-3xl font-bold ${textStyles.amount}`}
               >
                 {formatCurrency(readyToAssign)}
               </p>
               {isNegative && (
-                <p className="text-sm text-red-600 mt-2 font-medium">
-                  You've assigned more than you have available
+                <p className="text-xs text-red-600 mt-1 font-medium">
+                  You&apos;ve assigned more than you have available
                 </p>
               )}
               {isZero && (
-                <p className="text-sm text-slate-600 mt-2 font-medium">
+                <p className="text-xs text-slate-600 mt-1 font-medium">
                   Perfect! Every dollar is assigned
                 </p>
               )}
               {isPositive && (
-                <p className="text-sm text-emerald-600 mt-2 font-medium">
+                <p className="text-xs text-emerald-600 mt-1 font-medium">
                   You have money ready to be assigned
                 </p>
               )}
             </div>
 
             {/* Action Button */}
-            <div className="flex justify-center lg:justify-end">
+            <div className="flex justify-center sm:justify-end">
               {isNegative && (
                 <Button
                   onClick={handleUnassignMoney}
                   variant="outline"
-                  className="bg-white/90 border-2 border-red-200 hover:border-red-300 hover:bg-red-50/50 text-red-700 hover:text-red-800 font-medium h-12 px-6 rounded-2xl shadow-sm hover:shadow-md transition-all duration-300 transform hover:scale-105"
+                  className="bg-white/90 border border-red-200 hover:border-red-300 hover:bg-red-50/50 text-red-700 hover:text-red-800 font-medium h-9 px-4 rounded-xl shadow-sm hover:shadow-md transition-all duration-200"
                 >
                   <Minus className="h-4 w-4 mr-2" />
                   Unassign from Categories
@@ -123,15 +120,15 @@ export function MonthSelector({ readyToAssign }: MonthSelectorProps) {
               {isPositive && (
                 <Button
                   onClick={handleAssignMoney}
-                  className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-medium h-12 px-6 rounded-2xl shadow-lg hover:shadow-xl transition-all duration-300 transform hover:scale-105 hover:-translate-y-0.5"
+                  className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-medium h-9 px-4 rounded-xl shadow-sm hover:shadow-md transition-all duration-200"
                 >
                   <DollarSign className="h-4 w-4 mr-2" />
                   Assign Money
                 </Button>
               )}
               {isZero && (
-                <div className="flex items-center justify-center h-12 px-6 bg-white/90 rounded-2xl border-2 border-slate-200 text-slate-600 font-medium">
-                  <span className="text-lg mr-2">✨</span>
+                <div className="flex items-center justify-center h-9 px-4 bg-white/90 rounded-xl border border-slate-200 text-slate-600 font-medium text-sm">
+                  <span className="mr-2">✨</span>
                   All Set!
                 </div>
               )}

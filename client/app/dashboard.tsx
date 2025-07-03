@@ -10,7 +10,6 @@ export default function Dashboard() {
     "obligations",
   ]);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
-  const [accountsExpanded, setAccountsExpanded] = useState(false);
 
   const accounts: Account[] = [
     // Regular budgetable accounts
@@ -251,17 +250,15 @@ export default function Dashboard() {
   };
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100/30">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100/20">
       <Header
         accounts={accounts}
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
-        accountsExpanded={accountsExpanded}
-        setAccountsExpanded={setAccountsExpanded}
       />
 
-      <div className="max-w-8xl mx-auto px-4 py-8 lg:px-8 lg:py-12">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-8 lg:gap-10">
+      <div className="max-w-8xl mx-auto px-4 py-4 lg:px-6 lg:py-6">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
           <div className="lg:col-span-1">
             <Sidebar accounts={accounts} />
           </div>
