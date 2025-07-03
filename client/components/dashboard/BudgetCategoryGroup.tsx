@@ -28,6 +28,20 @@ export function BudgetCategoryGroup({
     }).format(amount);
   };
 
+  // Get badge styling based on total value (Material UI 3 design)
+  const getBadgeStyling = () => {
+    if (groupTotal > 0) {
+      // Positive - Green (success state)
+      return "bg-gradient-to-r from-brand-green to-emerald-100/80 text-brand-green-foreground hover:from-emerald-200/80 hover:to-emerald-300/60 ring-1 ring-emerald-200/50";
+    } else if (groupTotal < 0) {
+      // Negative - Red (error state)
+      return "bg-gradient-to-r from-brand-red to-red-100/80 text-brand-red-foreground hover:from-red-200/80 hover:to-red-300/60 ring-1 ring-red-200/50";
+    } else {
+      // Zero - Neutral (default state)
+      return "bg-gradient-to-r from-slate-100/80 to-slate-200/60 text-slate-700 hover:from-slate-200/80 hover:to-slate-300/60 ring-1 ring-slate-200/50";
+    }
+  };
+
   return (
     <Card className="rounded-3xl shadow-lg border-0 bg-gradient-to-br from-white to-slate-50/80 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:shadow-xl">
       <CardHeader
@@ -43,7 +57,7 @@ export function BudgetCategoryGroup({
             )}
             {group.name}
             <Badge
-              className="bg-gradient-to-r from-slate-100/80 to-slate-200/60 text-slate-700 hover:from-slate-200/80 hover:to-slate-300/60 font-medium border-0 px-3 py-1 rounded-xl shadow-sm"
+              className={`${getBadgeStyling()} font-medium border-0 px-3 py-1 rounded-xl shadow-sm transition-all duration-300 transform hover:scale-[1.02]`}
               variant="secondary"
             >
               {formatCurrency(groupTotal)}
