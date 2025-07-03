@@ -99,7 +99,7 @@ export default function Dashboard() {
         setMobileMenuOpen={setMobileMenuOpen}
       />
 
-      <div className="flex-1 max-w-8xl mx-auto px-4 py-4 lg:px-6 lg:py-6">
+      <div className="flex-1 max-w-8xl mx-auto px-4 py-4 lg:px-6 lg:py-6 mb-8">
         <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
           <div className="lg:col-span-1">
             <Sidebar accounts={budgetData.accounts} />
