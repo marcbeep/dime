@@ -14,14 +14,14 @@ import { formatAmount } from "../../lib/utils";
 
 export function HeroSection() {
   return (
-    <div className="max-w-8xl mx-auto">
-      <div className="grid lg:grid-cols-2 gap-20 items-center">
-        <div className="text-left px-4 sm:px-0 animate-fade-in">
-          <h1 className="text-3xl lg:text-5xl font-bold text-slate-900 leading-tight mb-6 animate-slide-up font-outfit">
+    <div className="w-full overflow-hidden">
+      <div className="grid lg:grid-cols-2 gap-8 lg:gap-20 items-center">
+        <div className="text-left animate-fade-in">
+          <h1 className="text-2xl sm:text-3xl lg:text-5xl font-bold text-slate-900 leading-tight mb-6 animate-slide-up font-outfit">
             Dime makes it easy peasy lemon squeezy to
           </h1>
 
-          <div className="text-3xl lg:text-5xl font-bold mb-8 space-y-3 animate-slide-up animation-delay-200 font-outfit">
+          <div className="text-2xl sm:text-3xl lg:text-5xl font-bold mb-8 space-y-3 animate-slide-up animation-delay-200 font-outfit">
             <div className="flex items-center space-x-3 flex-wrap gap-y-3">
               <span className="bg-gradient-to-r from-brand-blue to-brand-blue/80 text-white px-3 py-2 rounded-2xl flex items-center transform hover:scale-105 transition-transform duration-300 font-medium shadow-lg">
                 <Coins className="mr-2 h-5 w-5" />
@@ -31,7 +31,9 @@ export function HeroSection() {
                 <BarChart3 className="mr-2 h-5 w-5" />
                 track
               </span>
-              <span className="text-slate-900 text-4xl">&</span>
+              <span className="text-slate-900 text-2xl sm:text-3xl lg:text-4xl">
+                &
+              </span>
             </div>
             <div>
               <span className="bg-gradient-to-r from-brand-purple to-brand-purple/80 text-white px-3 py-2 rounded-2xl flex items-center inline-flex transform hover:scale-105 transition-transform duration-300 font-medium shadow-lg">
@@ -83,7 +85,7 @@ export function HeroSection() {
 
             {/* Main Activity Card Container */}
             <div className="relative overflow-hidden rounded-3xl">
-              <div className="w-96 h-[520px] lg:w-[480px] lg:h-[520px] bg-gradient-to-br from-brand-green/90 to-brand-blue/90 rounded-3xl p-6 lg:p-8 relative overflow-hidden transform hover:scale-105 transition-transform duration-300 shadow-2xl">
+              <div className="w-full max-w-sm mx-auto h-[520px] sm:max-w-md lg:max-w-lg lg:h-[520px] bg-gradient-to-br from-brand-green/90 to-brand-blue/90 rounded-3xl p-6 lg:p-8 relative overflow-hidden transform hover:scale-105 transition-transform duration-300 shadow-2xl">
                 {/* Background pattern */}
                 <div className="absolute inset-0 opacity-10">
                   <div className="absolute top-12 left-12 w-20 h-20 bg-white rounded-full animate-pulse"></div>

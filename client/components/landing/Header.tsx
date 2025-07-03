@@ -8,7 +8,7 @@ export function Header() {
 
   return (
     <header className="bg-white/90 backdrop-blur-md border-b border-slate-200/60 sticky top-0 z-50 shadow-sm">
-      <div className="max-w-8xl mx-auto px-4 sm:px-8 lg:px-12">
+      <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
         <div className="flex justify-between items-center h-20">
           {/* Logo */}
           <div className="flex items-center">
@@ -101,7 +101,7 @@ export function Header() {
 
       {/* Mobile menu */}
       {mobileMenuOpen && (
-        <div className="md:hidden border-t border-slate-200/60 bg-white/95 backdrop-blur-sm">
+        <div className="md:hidden border-t border-slate-200/60 bg-white/95 backdrop-blur-sm overflow-hidden">
           <div className="px-4 pt-4 pb-6 space-y-3">
             <a
               href="#"
