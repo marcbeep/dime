@@ -138,6 +138,7 @@ export default function Dashboard() {
     <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100/20 flex flex-col">
       <Header
         accounts={budgetData.accounts}
+        user={budgetData.user}
         mobileMenuOpen={mobileMenuOpen}
         setMobileMenuOpen={setMobileMenuOpen}
         activeView={activeView}

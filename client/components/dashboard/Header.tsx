@@ -24,12 +24,18 @@ import {
   DropdownMenuSeparator,
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
-import { Account } from "./types";
-import { filterAccountsByType, formatCurrency } from "@/lib/budget-utils";
+import { Account, User as UserType } from "./types";
+import {
+  filterAccountsByType,
+  formatCurrency,
+  getUserDisplayName,
+} from "@/lib/budget-utils";
+import { getDiceBearAvatar } from "@/lib/utils";
 import Image from "next/image";
 
 interface HeaderProps {
   accounts: Account[];
+  user: UserType;
   mobileMenuOpen: boolean;
   setMobileMenuOpen: (open: boolean) => void;
   activeView: "budget" | "accounts" | "reports";
@@ -38,6 +44,7 @@ interface HeaderProps {
 
 export function Header({
   accounts,
+  user,
   mobileMenuOpen,
   setMobileMenuOpen,
   activeView,
@@ -47,6 +54,11 @@ export function Header({
   const regularAccounts = filterAccountsByType(accounts, "account");
   const assets = filterAccountsByType(accounts, "asset");
   const debts = filterAccountsByType(accounts, "debt");
+
+  // Generate avatar URLs
+  const avatarUrl = getDiceBearAvatar(user.email, 80);
+  const smallAvatarUrl = getDiceBearAvatar(user.email, 32);
+  const displayName = getUserDisplayName(user);
 
   const renderAccountSection = (sectionAccounts: Account[], title: string) => {
     const sectionTotal = sectionAccounts.reduce(
@@ -114,16 +126,16 @@ export function Header({
         {/* User Profile */}
         <div className="flex items-center gap-4 pb-6 border-b border-slate-200/60">
           <Avatar className="h-14 w-14 shadow-lg ring-2 ring-white">
-            <AvatarImage src="/placeholder-user.jpg" />
+            <AvatarImage src={avatarUrl} alt={`${displayName}'s avatar`} />
             <AvatarFallback className="bg-gradient-to-r from-slate-600 to-slate-700 text-white font-semibold text-lg">
-              J
+              {displayName.charAt(0).toUpperCase()}
             </AvatarFallback>
           </Avatar>
           <div>
             <h2 className="font-semibold text-slate-900 text-lg">
-              John&apos;s Budget
+              {displayName}&apos;s Budget
             </h2>
-            <p className="text-sm text-slate-500">john.doe@university.edu</p>
+            <p className="text-sm text-slate-500">{user.email}</p>
           </div>
         </div>
 
@@ -233,13 +245,16 @@ export function Header({
                 className="flex items-center gap-2 lg:gap-3 h-9 lg:h-10 px-2 lg:px-3 rounded-xl hover:bg-slate-100/70 transition-all duration-200"
               >
                 <Avatar className="h-6 w-6 lg:h-8 lg:w-8 shadow-sm">
-                  <AvatarImage src="/placeholder-user.jpg" />
+                  <AvatarImage
+                    src={smallAvatarUrl}
+                    alt={`${displayName}'s avatar`}
+                  />
                   <AvatarFallback className="bg-gradient-to-r from-slate-600 to-slate-700 text-white font-medium text-xs lg:text-sm">
-                    J
+                    {displayName.charAt(0).toUpperCase()}
                   </AvatarFallback>
                 </Avatar>
                 <span className="hidden sm:inline font-medium text-slate-700 text-sm lg:text-base">
-                  John
+                  {displayName}
                 </span>
                 <ChevronDown className="h-3 w-3 lg:h-4 lg:w-4 text-slate-500" />
               </Button>
