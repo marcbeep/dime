@@ -93,7 +93,6 @@ export function LandingFooter() {
           </Link>{" "}
           in Liverpool with Next.js, TypeScript, and{" "}
           <Heart className="inline h-3 w-3 text-red-500 fill-current align-text-bottom" />
-          .
         </span>
         <div className="flex gap-4">
           <Link href="/privacy" className="hover:underline">
