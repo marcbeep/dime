@@ -56,22 +56,6 @@ export function HeroSection() {
               Start Budgeting for Free
               <ArrowRight className="ml-2 h-5 w-5" />
             </Button>
-            <Button
-              variant="outline"
-              size="lg"
-              className="transform hover:scale-105 transition-all duration-300 font-semibold h-12 px-6 rounded-2xl border-2 border-slate-200 hover:border-slate-300 hover:bg-slate-50/70 shadow-sm hover:shadow-md"
-              asChild
-            >
-              <a
-                href="https://marc.tt"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center"
-              >
-                Made with <Heart className="mx-2 h-4 w-4 text-red-500" /> by
-                Marc
-              </a>
-            </Button>
           </div>
         </div>
 

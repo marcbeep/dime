@@ -53,7 +53,7 @@ export function MonthSelector({ readyToAssign }: MonthSelectorProps) {
   return (
     <div className="space-y-4 min-w-[300px] w-full">
       {/* Top Action Bar */}
-      <div className="flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
+      <div className="flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-end">
         <Button
           onClick={handleAddTransaction}
           className="w-full sm:w-auto bg-gradient-to-r from-slate-900 to-slate-800 hover:from-slate-800 hover:to-slate-700 text-white font-medium shadow-md hover:shadow-lg border-0 h-10 px-6 rounded-xl transition-all duration-200 transform hover:scale-[1.02] min-w-[200px]"

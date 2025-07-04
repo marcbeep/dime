@@ -1,6 +1,6 @@
 "use client";
 import { Header, HeroSection } from "@/components/landing";
-import { Footer } from "@/components/ui/footer";
+import { LandingFooter } from "@/components/ui/landing-footer";
 
 export default function Landing() {
   return (
@@ -12,7 +12,7 @@ export default function Landing() {
         <HeroSection />
       </main>
 
-      <Footer />
+      <LandingFooter />
     </div>
   );
 }
