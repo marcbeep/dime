@@ -7,7 +7,6 @@ import {
   TrendingUp,
   LogOut,
   User,
-  Coins,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
@@ -27,6 +26,7 @@ import {
 } from "@/components/ui/dropdown-menu";
 import { Account } from "./types";
 import { filterAccountsByType, formatCurrency } from "@/lib/budget-utils";
+import Image from "next/image";
 
 interface HeaderProps {
   accounts: Account[];
@@ -210,8 +210,14 @@ export function Header({
           {/* Logo - Always visible */}
           <div className="flex items-center">
             <div className="text-xl lg:text-2xl font-bold text-slate-900 flex items-center">
-              <div className="w-8 h-8 lg:w-10 lg:h-10 bg-gradient-to-r from-brand-blue to-brand-purple rounded-xl lg:rounded-2xl flex items-center justify-center mr-2 lg:mr-3 shadow-md lg:shadow-lg">
-                <Coins className="h-4 w-4 lg:h-6 lg:w-6 text-white" />
+              <div className="w-8 h-8 lg:w-10 lg:h-10 rounded-xl lg:rounded-2xl overflow-hidden mr-2 lg:mr-3 shadow-md lg:shadow-lg">
+                <Image
+                  src="/logo.png"
+                  alt="Dime Logo"
+                  width={40}
+                  height={40}
+                  className="w-full h-full object-cover"
+                />
               </div>
               Dime
             </div>

@@ -1,7 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
-import { AlertTriangle, BarChart3 } from "lucide-react";
+import { AlertTriangle } from "lucide-react";
 import {
   Header,
   Sidebar,

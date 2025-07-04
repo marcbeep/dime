@@ -18,12 +18,10 @@ import {
   ChartTooltipContent,
 } from "@/components/ui/chart";
 import { Button } from "@/components/ui/button";
-import { Badge } from "@/components/ui/badge";
 import {
   getNetWorthData,
   formatCurrency,
   getNetWorthTrend,
-  type NetWorthDataPoint,
 } from "@/lib/networth-data";
 
 const chartConfig = {

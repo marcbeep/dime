@@ -1,7 +1,8 @@
 "use client";
-import { Menu, X, Star, Coins } from "lucide-react";
+import { Menu, X, Star } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
+import Image from "next/image";
 
 export function Header() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
@@ -13,8 +14,14 @@ export function Header() {
           {/* Logo */}
           <div className="flex items-center">
             <div className="text-2xl font-bold text-slate-900 flex items-center">
-              <div className="w-10 h-10 bg-gradient-to-r from-brand-blue to-brand-purple rounded-2xl flex items-center justify-center mr-3 shadow-lg">
-                <Coins className="h-6 w-6 text-white" />
+              <div className="w-10 h-10 rounded-2xl overflow-hidden mr-3 shadow-lg">
+                <Image
+                  src="/logo.png"
+                  alt="Dime Logo"
+                  width={40}
+                  height={40}
+                  className="w-full h-full object-cover"
+                />
               </div>
               Dime
             </div>

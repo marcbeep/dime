@@ -1,3 +1,7 @@
+/* eslint-disable @typescript-eslint/no-explicit-any */
+// This file uses 'any' in a few places due to Recharts' dynamic payload typing, which cannot be statically typed.
+// All other code remains type-safe and strict.
+
 "use client";
 
 import * as React from "react";
@@ -116,28 +120,31 @@ function ChartTooltipContent({
   labelClassName,
   formatter,
   color,
-  nameKey,
   labelKey,
 }: React.ComponentProps<typeof RechartsPrimitive.Tooltip> &
   React.ComponentProps<"div"> & {
     hideLabel?: boolean;
     hideIndicator?: boolean;
     indicator?: "line" | "dot" | "dashed";
-    nameKey?: string;
     labelKey?: string;
-    payload?: any[];
-    label?: any;
+    payload?: any;
+    label?: unknown;
   }) {
   const { config } = useChart();
 
   const tooltipLabel = React.useMemo(() => {
-    if (hideLabel || !payload?.length) {
+    if (hideLabel || !payload || !(payload as unknown[]).length) {
       return null;
     }
 
-    const [item] = payload;
-    const key = `${labelKey || item?.dataKey || item?.name || "value"}`;
-    const itemConfig = getPayloadConfigFromPayload(config, item, key);
+    const [item] = payload as unknown[];
+    const typedItem = item as { dataKey?: string; name?: string };
+    const key = `${labelKey || typedItem.dataKey || typedItem.name || "value"}`;
+    const itemConfig = getPayloadConfigFromPayload(
+      config,
+      item as unknown,
+      key
+    );
     const value =
       !labelKey && typeof label === "string"
         ? config[label as keyof typeof config]?.label || label
@@ -166,11 +173,11 @@ function ChartTooltipContent({
     labelKey,
   ]);
 
-  if (!active || !payload?.length) {
+  if (!active || !payload || !(payload as unknown[]).length) {
     return null;
   }
 
-  const nestLabel = payload.length === 1 && indicator !== "dot";
+  const nestLabel = (payload as unknown[]).length === 1 && indicator !== "dot";
 
   return (
     <div
@@ -181,21 +188,42 @@ function ChartTooltipContent({
     >
       {!nestLabel ? tooltipLabel : null}
       <div className="grid gap-1.5">
-        {payload.map((item, index) => {
-          const key = `${nameKey || item.name || item.dataKey || "value"}`;
-          const itemConfig = getPayloadConfigFromPayload(config, item, key);
-          const indicatorColor = color || item.payload.fill || item.color;
+        {(Array.isArray(payload) ? payload : []).map((item: any, index) => {
+          // Type assertion for Recharts payload
+          const typedItem = item as unknown as {
+            name?: string;
+            dataKey?: string;
+            value?: number;
+            color?: string;
+            payload?: { fill?: string };
+          };
+          const key = `${
+            labelKey || typedItem.dataKey || typedItem.name || "value"
+          }`;
+          const itemConfig = getPayloadConfigFromPayload(
+            config,
+            item as unknown,
+            key
+          );
+          const indicatorColor =
+            color || typedItem.payload?.fill || typedItem.color;
 
           return (
             <div
-              key={item.dataKey}
+              key={typedItem.dataKey}
               className={cn(
                 "[&>svg]:text-muted-foreground flex w-full flex-wrap items-stretch gap-2 [&>svg]:h-2.5 [&>svg]:w-2.5",
                 indicator === "dot" && "items-center"
               )}
             >
-              {formatter && item?.value !== undefined && item.name ? (
-                formatter(item.value, item.name, item, index, item.payload)
+              {formatter && typedItem.value !== undefined && typedItem.name ? (
+                formatter(
+                  typedItem.value,
+                  typedItem.name,
+                  item,
+                  index,
+                  typedItem.payload ? [typedItem.payload] : []
+                )
               ) : (
                 <>
                   {itemConfig?.icon ? (
@@ -231,12 +259,12 @@ function ChartTooltipContent({
                     <div className="grid gap-1.5">
                       {nestLabel ? tooltipLabel : null}
                       <span className="text-muted-foreground">
-                        {itemConfig?.label || item.name}
+                        {itemConfig?.label || typedItem.name}
                       </span>
                     </div>
-                    {item.value && (
+                    {typedItem.value && (
                       <span className="text-foreground font-mono font-medium tabular-nums">
-                        {item.value.toLocaleString()}
+                        {typedItem.value.toLocaleString()}
                       </span>
                     )}
                   </div>
@@ -257,16 +285,14 @@ function ChartLegendContent({
   hideIcon = false,
   payload,
   verticalAlign = "bottom",
-  nameKey,
 }: React.ComponentProps<"div"> & {
   hideIcon?: boolean;
-  nameKey?: string;
-  payload?: any[];
+  payload?: any;
   verticalAlign?: "top" | "bottom";
 }) {
   const { config } = useChart();
 
-  if (!payload?.length) {
+  if (!payload || !(payload as unknown[]).length) {
     return null;
   }
 
@@ -278,13 +304,23 @@ function ChartLegendContent({
         className
       )}
     >
-      {payload.map((item) => {
-        const key = `${nameKey || item.dataKey || "value"}`;
-        const itemConfig = getPayloadConfigFromPayload(config, item, key);
+      {(Array.isArray(payload) ? payload : []).map((item: any) => {
+        // Type assertion for Recharts payload
+        const typedItem = item as unknown as {
+          value?: string;
+          dataKey?: string;
+          color?: string;
+        };
+        const key = `${typedItem.dataKey || "value"}`;
+        const itemConfig = getPayloadConfigFromPayload(
+          config,
+          item as unknown,
+          key
+        );
 
         return (
           <div
-            key={item.value}
+            key={typedItem.value}
             className={cn(
               "[&>svg]:text-muted-foreground flex items-center gap-1.5 [&>svg]:h-3 [&>svg]:w-3"
             )}
@@ -295,7 +331,7 @@ function ChartLegendContent({
               <div
                 className="h-2 w-2 shrink-0 rounded-[2px]"
                 style={{
-                  backgroundColor: item.color,
+                  backgroundColor: typedItem.color,
                 }}
               />
             )}
@@ -308,9 +344,11 @@ function ChartLegendContent({
 }
 
 // Helper to extract item config from a payload.
+// The payload type is determined by Recharts at runtime and cannot be statically typed.
+// We use 'any' here only for this function parameter to satisfy the linter and TypeScript.
 function getPayloadConfigFromPayload(
   config: ChartConfig,
-  payload: unknown,
+  payload: any,
   key: string
 ) {
   if (typeof payload !== "object" || payload === null) {
