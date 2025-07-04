@@ -83,24 +83,9 @@ export function LandingFooter() {
               <Linkedin className="w-5 h-5" />
             </Link>
           </div>
-        </div>
-      </div>
-      <div className="max-w-4xl mx-auto flex flex-col sm:flex-row justify-between items-center border-t mt-8 pt-6 text-xs text-muted-foreground gap-2">
-        <span>
-          © {new Date().getFullYear()} Dime. Built by{" "}
-          <Link href="https://marc.tt" className="hover:underline">
-            Marc Beepath
-          </Link>{" "}
-          in Liverpool with Next.js, TypeScript, and{" "}
-          <Heart className="inline h-3 w-3 text-red-500 fill-current align-text-bottom" />
-        </span>
-        <div className="flex gap-4">
-          <Link href="/privacy" className="hover:underline">
-            Privacy
-          </Link>
-          <Link href="/terms" className="hover:underline">
-            Terms
-          </Link>
+          <p className="text-xs text-muted-foreground mt-2">
+            Built with Next.js, TypeScript, and ❤️
+          </p>
         </div>
       </div>
     </footer>
