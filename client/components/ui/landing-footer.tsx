@@ -85,7 +85,7 @@ export function LandingFooter() {
           </div>
           <p className="text-xs text-muted-foreground mt-2">
             Built with Next.js, TypeScript, and{" "}
-            <Heart className="inline h-3 w-3 text-red-500 fill-current align-text-bottom" />
+            <Heart className="inline h-3 w-3 fill-black fill-current align-text-bottom" />
           </p>
         </div>
       </div>
