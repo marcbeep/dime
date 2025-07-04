@@ -16,7 +16,6 @@ export function Footer() {
           >
             Marc Beepath
           </a>
-          <span>in Liverpool, June 2025</span>
         </div>
       </div>
     </footer>
