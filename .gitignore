@@ -18,7 +18,8 @@ dist/
 downloads/
 eggs/
 .eggs/
-lib/
+# Note: lib/ commented out to allow client/lib/ for TypeScript utils
+# lib/
 lib64/
 parts/
 sdist/
