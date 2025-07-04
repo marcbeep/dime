@@ -150,8 +150,8 @@ export default function Dashboard() {
         onViewChange={handleViewChange}
       />
 
-      <div className="flex-1 max-w-8xl mx-auto px-4 py-4 lg:px-6 lg:py-6 mb-8">
-        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8">
+      <div className="flex-1 max-w-8xl mx-auto px-4 py-4 lg:px-6 lg:py-6 mb-8 min-w-0">
+        <div className="grid grid-cols-1 lg:grid-cols-4 gap-6 lg:gap-8 min-w-[320px]">
           {/* Sidebar - Always visible on desktop */}
           <div className="lg:col-span-1">
             <Sidebar
@@ -162,7 +162,7 @@ export default function Dashboard() {
           </div>
 
           {/* Main content area */}
-          <div className="lg:col-span-3">{renderContent()}</div>
+          <div className="lg:col-span-3 min-w-0">{renderContent()}</div>
         </div>
       </div>
 

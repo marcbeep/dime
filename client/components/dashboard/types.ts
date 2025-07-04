@@ -1,8 +1,6 @@
 export interface Category {
   id: string;
   name: string;
-  assigned: number;
-  activity: number;
   available: number;
   status: string;
   sortOrder: number;
@@ -75,7 +73,7 @@ export interface BudgetData {
 
 export interface BudgetCalculations {
   totalBudgetable: number;
-  totalAssigned: number;
+  totalAvailable: number;
   readyToAssign: number;
   totalAssets: number;
   totalDebts: number;

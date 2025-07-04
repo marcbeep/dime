@@ -43,32 +43,25 @@ export function BudgetCategoryGroup({
   };
 
   return (
-    <Card className="rounded-3xl shadow-lg border-0 bg-gradient-to-br from-white to-slate-50/80 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:shadow-xl min-h-[120px]">
+    <Card className="rounded-3xl shadow-lg border-0 bg-gradient-to-br from-white to-slate-50/80 backdrop-blur-sm overflow-hidden transition-all duration-300 hover:shadow-xl min-h-[120px] min-w-[300px]">
       <CardHeader
         className="pb-6 cursor-pointer hover:bg-slate-50/70 transition-all duration-300 group"
         onClick={onToggle}
       >
-        <div className="flex items-center justify-between">
-          <CardTitle className="text-lg font-semibold text-slate-900 flex items-center gap-4">
-            {isExpanded ? (
-              <ChevronUp className="h-5 w-5 text-slate-600 group-hover:text-slate-800 transition-colors" />
-            ) : (
-              <ChevronDown className="h-5 w-5 text-slate-600 group-hover:text-slate-800 transition-colors" />
-            )}
-            {group.name}
-            <Badge
-              className={`${getBadgeStyling()} font-medium border-0 px-3 py-1 rounded-xl shadow-sm transition-all duration-300 transform hover:scale-[1.02]`}
-              variant="secondary"
-            >
-              {formatCurrency(groupTotal)}
-            </Badge>
-          </CardTitle>
-          <div className="hidden sm:flex items-center gap-8 text-sm font-medium text-slate-600">
-            <span className="w-24 text-right">Assigned</span>
-            <span className="w-24 text-right">Activity</span>
-            <span className="w-28 text-right">Available</span>
-          </div>
-        </div>
+        <CardTitle className="text-lg font-semibold text-slate-900 flex items-center gap-4 min-w-0">
+          {isExpanded ? (
+            <ChevronUp className="h-5 w-5 text-slate-600 group-hover:text-slate-800 transition-colors flex-shrink-0" />
+          ) : (
+            <ChevronDown className="h-5 w-5 text-slate-600 group-hover:text-slate-800 transition-colors flex-shrink-0" />
+          )}
+          <span className="truncate">{group.name}</span>
+          <Badge
+            className={`${getBadgeStyling()} font-medium border-0 px-3 py-1 rounded-xl shadow-sm transition-all duration-300 transform hover:scale-[1.02] flex-shrink-0 min-w-[80px]`}
+            variant="secondary"
+          >
+            {formatCurrency(groupTotal)}
+          </Badge>
+        </CardTitle>
       </CardHeader>
 
       <CardContent
@@ -78,7 +71,7 @@ export function BudgetCategoryGroup({
             : "max-h-0 opacity-0 overflow-hidden pb-0"
         }`}
       >
-        <div className="space-y-2">
+        <div className="space-y-2 min-w-0">
           {group.categories.map((category) => (
             <BudgetCategory key={category.name} category={category} />
           ))}

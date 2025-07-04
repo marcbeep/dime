@@ -44,23 +44,23 @@ export function calculateBudgetMetrics(
   const totalAssets = assets.reduce((sum, acc) => sum + acc.balance, 0);
   const totalDebts = Math.abs(debts.reduce((sum, acc) => sum + acc.balance, 0));
 
-  // Calculate total assigned across all categories
-  const totalAssigned = categoryGroups.reduce(
+  // Calculate total available across all categories
+  const totalAvailable = categoryGroups.reduce(
     (sum, group) =>
       sum +
-      group.categories.reduce((groupSum, cat) => groupSum + cat.assigned, 0),
+      group.categories.reduce((groupSum, cat) => groupSum + cat.available, 0),
     0
   );
 
-  // Ready to assign = total budgetable money - money already assigned
-  const readyToAssign = totalBudgetable - totalAssigned;
+  // Ready to assign = total budgetable money - money allocated to categories
+  const readyToAssign = totalBudgetable - totalAvailable;
 
   // Net worth = assets - debts (budgetable accounts are typically checking accounts, not counted as assets)
   const netWorth = totalAssets - totalDebts;
 
   return {
     totalBudgetable,
-    totalAssigned,
+    totalAvailable,
     readyToAssign,
     totalAssets,
     totalDebts,

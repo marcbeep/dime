@@ -102,8 +102,6 @@
         {
           "id": "cat_1",
           "name": "Emergency Fund",
-          "assigned": 100.0,
-          "activity": 0.0,
           "available": 100.0,
           "status": "good",
           "sortOrder": 1,
@@ -113,8 +111,6 @@
         {
           "id": "cat_2",
           "name": "Spring Break Fund",
-          "assigned": 50.0,
-          "activity": 0.0,
           "available": 50.0,
           "status": "good",
           "sortOrder": 2,
@@ -124,8 +120,6 @@
         {
           "id": "cat_3",
           "name": "Graduation Trip",
-          "assigned": 50.0,
-          "activity": 0.0,
           "available": 50.0,
           "status": "good",
           "sortOrder": 3,
@@ -145,9 +139,7 @@
         {
           "id": "cat_4",
           "name": "Rent",
-          "assigned": 700.0,
-          "activity": 700.0,
-          "available": 0.0,
+          "available": 700.0,
           "status": "good",
           "sortOrder": 1,
           "createdAt": "2024-01-15T10:30:00Z",
@@ -156,9 +148,7 @@
         {
           "id": "cat_5",
           "name": "Utilities",
-          "assigned": 60.0,
-          "activity": 60.0,
-          "available": 0.0,
+          "available": 60.0,
           "status": "good",
           "sortOrder": 2,
           "createdAt": "2024-01-15T10:30:00Z",
@@ -167,9 +157,7 @@
         {
           "id": "cat_6",
           "name": "Internet",
-          "assigned": 30.0,
-          "activity": 30.0,
-          "available": 0.0,
+          "available": 30.0,
           "status": "good",
           "sortOrder": 3,
           "createdAt": "2024-01-15T10:30:00Z",
@@ -178,9 +166,7 @@
         {
           "id": "cat_7",
           "name": "Phone",
-          "assigned": 20.0,
-          "activity": 20.0,
-          "available": 0.0,
+          "available": 20.0,
           "status": "good",
           "sortOrder": 4,
           "createdAt": "2024-01-15T10:30:00Z",
@@ -199,9 +185,7 @@
         {
           "id": "cat_8",
           "name": "Spotify",
-          "assigned": 10.0,
-          "activity": 10.0,
-          "available": 0.0,
+          "available": 10.0,
           "status": "good",
           "sortOrder": 1,
           "createdAt": "2024-01-15T10:30:00Z",
@@ -210,9 +194,7 @@
         {
           "id": "cat_9",
           "name": "Netflix",
-          "assigned": 10.0,
-          "activity": 10.0,
-          "available": 0.0,
+          "available": 10.0,
           "status": "good",
           "sortOrder": 2,
           "createdAt": "2024-01-15T10:30:00Z",
@@ -221,9 +203,7 @@
         {
           "id": "cat_10",
           "name": "Amazon Prime",
-          "assigned": 5.0,
-          "activity": 5.0,
-          "available": 0.0,
+          "available": 5.0,
           "status": "good",
           "sortOrder": 3,
           "createdAt": "2024-01-15T10:30:00Z",
@@ -232,9 +212,7 @@
         {
           "id": "cat_11",
           "name": "Gym",
-          "assigned": 20.0,
-          "activity": 20.0,
-          "available": 0.0,
+          "available": 20.0,
           "status": "good",
           "sortOrder": 4,
           "createdAt": "2024-01-15T10:30:00Z",
@@ -253,8 +231,6 @@
         {
           "id": "cat_12",
           "name": "Textbooks",
-          "assigned": 50.0,
-          "activity": 0.0,
           "available": 50.0,
           "status": "good",
           "sortOrder": 1,
@@ -264,8 +240,6 @@
         {
           "id": "cat_13",
           "name": "Supplies",
-          "assigned": 20.0,
-          "activity": 0.0,
           "available": 20.0,
           "status": "good",
           "sortOrder": 2,
@@ -275,8 +249,6 @@
         {
           "id": "cat_14",
           "name": "Printing",
-          "assigned": 10.0,
-          "activity": 0.0,
           "available": 10.0,
           "status": "good",
           "sortOrder": 3,
@@ -296,9 +268,7 @@
         {
           "id": "cat_15",
           "name": "Groceries",
-          "assigned": 200.0,
-          "activity": 120.0,
-          "available": 80.0,
+          "available": 150.0,
           "status": "good",
           "sortOrder": 1,
           "createdAt": "2024-01-15T10:30:00Z",
@@ -307,9 +277,7 @@
         {
           "id": "cat_16",
           "name": "Dining Out",
-          "assigned": 100.0,
-          "activity": 60.0,
-          "available": 40.0,
+          "available": 80.0,
           "status": "good",
           "sortOrder": 2,
           "createdAt": "2024-01-15T10:30:00Z",
@@ -318,9 +286,7 @@
         {
           "id": "cat_17",
           "name": "Coffee",
-          "assigned": 30.0,
-          "activity": 20.0,
-          "available": 10.0,
+          "available": 25.0,
           "status": "good",
           "sortOrder": 3,
           "createdAt": "2024-01-15T10:30:00Z",
@@ -329,9 +295,7 @@
         {
           "id": "cat_18",
           "name": "Entertainment",
-          "assigned": 40.0,
-          "activity": 20.0,
-          "available": 20.0,
+          "available": 35.0,
           "status": "good",
           "sortOrder": 4,
           "createdAt": "2024-01-15T10:30:00Z",
@@ -340,9 +304,7 @@
         {
           "id": "cat_19",
           "name": "Shopping",
-          "assigned": 40.0,
-          "activity": 20.0,
-          "available": 20.0,
+          "available": 30.0,
           "status": "good",
           "sortOrder": 5,
           "createdAt": "2024-01-15T10:30:00Z",
@@ -448,7 +410,7 @@
       "id": "txn_9",
       "accountId": "acc_7",
       "date": "2024-01-19",
-      "payee": "Amazon",
+      "payee": "Online Purchase",
       "category": "cat_19",
       "amount": 89.99,
       "type": "outflow",
@@ -456,13 +418,13 @@
     },
     {
       "id": "txn_10",
-      "accountId": "acc_7",
-      "date": "2024-01-18",
+      "accountId": "acc_1",
+      "date": "2024-01-15",
       "payee": "Spotify",
       "category": "cat_8",
       "amount": 10.0,
       "type": "outflow",
-      "createdAt": "2024-01-18T10:00:00Z"
+      "createdAt": "2024-01-15T10:30:00Z"
     },
     {
       "id": "txn_11",

@@ -13,7 +13,7 @@ export function BudgetCategories({
   onToggleCategory,
 }: BudgetCategoriesProps) {
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 min-w-[300px] w-full">
       {categoryGroups.map((group) => (
         <BudgetCategoryGroup
           key={group.id}

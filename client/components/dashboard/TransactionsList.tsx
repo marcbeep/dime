@@ -1,15 +1,13 @@
 import { useState } from "react";
 import {
   Calendar,
-  Filter,
   Search,
-  ArrowUpDown,
   Plus,
   ChevronLeft,
   ChevronRight,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Transaction, Account, CategoryGroup } from "./types";
 import { formatCurrency } from "@/lib/budget-utils";
@@ -25,8 +23,8 @@ export function TransactionsList({
   accounts,
   categoryGroups,
 }: TransactionsListProps) {
-  const [sortBy, setSortBy] = useState<"date" | "amount" | "payee">("date");
-  const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
+  const [sortBy] = useState<"date" | "amount" | "payee">("date");
+  const [sortOrder] = useState<"asc" | "desc">("desc");
   const [filterAccount, setFilterAccount] = useState<string>("all");
   const [searchTerm, setSearchTerm] = useState("");
   const [currentPage, setCurrentPage] = useState(1);
@@ -122,7 +120,7 @@ export function TransactionsList({
     const pageNumbers = [];
     const maxVisiblePages = 5;
     let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
-    let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+    const endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
 
     if (endPage - startPage + 1 < maxVisiblePages) {
       startPage = Math.max(1, endPage - maxVisiblePages + 1);

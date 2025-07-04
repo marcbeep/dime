@@ -51,12 +51,12 @@ export function MonthSelector({ readyToAssign }: MonthSelectorProps) {
   const textStyles = getTextStyling();
 
   return (
-    <div className="space-y-4">
+    <div className="space-y-4 min-w-[300px] w-full">
       {/* Top Action Bar */}
       <div className="flex flex-col sm:flex-row gap-3 sm:items-center sm:justify-between">
         <Button
           onClick={handleAddTransaction}
-          className="w-full sm:w-auto bg-gradient-to-r from-slate-900 to-slate-800 hover:from-slate-800 hover:to-slate-700 text-white font-medium shadow-md hover:shadow-lg border-0 h-10 px-6 rounded-xl transition-all duration-200 transform hover:scale-[1.02]"
+          className="w-full sm:w-auto bg-gradient-to-r from-slate-900 to-slate-800 hover:from-slate-800 hover:to-slate-700 text-white font-medium shadow-md hover:shadow-lg border-0 h-10 px-6 rounded-xl transition-all duration-200 transform hover:scale-[1.02] min-w-[200px]"
         >
           <Plus className="h-4 w-4 mr-2" />
           Add Transaction
@@ -65,19 +65,19 @@ export function MonthSelector({ readyToAssign }: MonthSelectorProps) {
 
       {/* Ready to Assign Card - Compact */}
       <Card
-        className={`border-0 shadow-sm rounded-2xl overflow-hidden ${getCardStyling()}`}
+        className={`border-0 shadow-sm rounded-2xl overflow-hidden ${getCardStyling()} min-w-[300px]`}
       >
         <CardContent className="p-4 lg:p-5">
-          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between min-w-0">
             {/* Amount Display */}
-            <div className="flex-1 text-center sm:text-left">
+            <div className="flex-1 text-center sm:text-left min-w-0">
               <p
                 className={`text-xs font-medium mb-1 ${textStyles.label} uppercase tracking-wide`}
               >
                 Ready to Assign
               </p>
               <p
-                className={`text-2xl lg:text-3xl font-bold ${textStyles.amount}`}
+                className={`text-2xl lg:text-3xl font-bold ${textStyles.amount} break-words`}
               >
                 {formatCurrency(readyToAssign)}
               </p>
@@ -99,30 +99,32 @@ export function MonthSelector({ readyToAssign }: MonthSelectorProps) {
             </div>
 
             {/* Action Button */}
-            <div className="flex justify-center sm:justify-end">
+            <div className="flex justify-center sm:justify-end flex-shrink-0">
               {isNegative && (
                 <Button
                   onClick={handleUnassignMoney}
                   variant="outline"
-                  className="bg-white/90 border border-red-200 hover:border-red-300 hover:bg-red-50/50 text-red-700 hover:text-red-800 font-medium h-9 px-4 rounded-xl shadow-sm hover:shadow-md transition-all duration-200"
+                  className="bg-white/90 border border-red-200 hover:border-red-300 hover:bg-red-50/50 text-red-700 hover:text-red-800 font-medium h-9 px-4 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 min-w-[160px] text-sm"
                 >
-                  <Minus className="h-4 w-4 mr-2" />
-                  Unassign from Categories
+                  <Minus className="h-4 w-4 mr-2 flex-shrink-0" />
+                  <span className="whitespace-nowrap">
+                    Unassign from Categories
+                  </span>
                 </Button>
               )}
               {isPositive && (
                 <Button
                   onClick={handleAssignMoney}
-                  className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-medium h-9 px-4 rounded-xl shadow-sm hover:shadow-md transition-all duration-200"
+                  className="bg-gradient-to-r from-emerald-600 to-emerald-700 hover:from-emerald-700 hover:to-emerald-800 text-white font-medium h-9 px-4 rounded-xl shadow-sm hover:shadow-md transition-all duration-200 min-w-[120px]"
                 >
-                  <DollarSign className="h-4 w-4 mr-2" />
-                  Assign Money
+                  <DollarSign className="h-4 w-4 mr-2 flex-shrink-0" />
+                  <span className="whitespace-nowrap">Assign Money</span>
                 </Button>
               )}
               {isZero && (
-                <div className="flex items-center justify-center h-9 px-4 bg-white/90 rounded-xl border border-slate-200 text-slate-600 font-medium text-sm">
+                <div className="flex items-center justify-center h-9 px-4 bg-white/90 rounded-xl border border-slate-200 text-slate-600 font-medium text-sm min-w-[80px]">
                   <span className="mr-2">✨</span>
-                  All Set!
+                  <span className="whitespace-nowrap">All Set!</span>
                 </div>
               )}
             </div>

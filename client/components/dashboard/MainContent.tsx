@@ -16,7 +16,7 @@ export function MainContent({
   onToggleCategory,
 }: MainContentProps) {
   return (
-    <div className="space-y-6">
+    <div className="space-y-6 min-w-[300px] w-full">
       <MonthSelector readyToAssign={readyToAssign} />
       <BudgetCategories
         categoryGroups={categoryGroups}
