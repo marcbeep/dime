@@ -1,7 +1,7 @@
 import { Navigation } from "./Navigation";
 import { AccountsList } from "./AccountsList";
 import { Account } from "./types";
-import { filterAccountsByType } from "./utils";
+import { filterAccountsByType } from "@/lib/budget-utils";
 
 interface SidebarProps {
   accounts: Account[];

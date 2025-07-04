@@ -10,7 +10,7 @@ import {
   Heart,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { formatAmount } from "@/lib/utils";
+import { formatCurrency } from "@/lib/budget-utils";
 
 export function HeroSection() {
   return (
@@ -110,7 +110,7 @@ export function HeroSection() {
                         </p>
                       </div>
                       <div className="text-sm font-bold text-red-600 flex-shrink-0">
-                        -{formatAmount(40)}
+                        -{formatCurrency(40)}
                       </div>
                     </div>
                   </div>
@@ -130,7 +130,7 @@ export function HeroSection() {
                         </p>
                       </div>
                       <div className="text-sm font-bold text-red-600 flex-shrink-0">
-                        -{formatAmount(85)}
+                        -{formatCurrency(85)}
                       </div>
                     </div>
                   </div>
@@ -150,7 +150,7 @@ export function HeroSection() {
                         </p>
                       </div>
                       <div className="text-sm font-bold text-emerald-600 flex-shrink-0">
-                        +{formatAmount(2500)}
+                        +{formatCurrency(2500)}
                       </div>
                     </div>
                   </div>
@@ -170,7 +170,7 @@ export function HeroSection() {
                         </p>
                       </div>
                       <div className="text-sm font-bold text-red-600 flex-shrink-0">
-                        -{formatAmount(12.99)}
+                        -{formatCurrency(12.99)}
                       </div>
                     </div>
                   </div>
@@ -183,7 +183,7 @@ export function HeroSection() {
                           This month
                         </span>
                         <span className="text-sm font-bold text-emerald-600">
-                          {formatAmount(1200)} under budget
+                          {formatCurrency(1200)} under budget
                         </span>
                       </div>
                     </div>

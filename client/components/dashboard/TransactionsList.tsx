@@ -12,7 +12,7 @@ import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Transaction, Account, CategoryGroup } from "./types";
-import { formatCurrency } from "./utils";
+import { formatCurrency } from "@/lib/budget-utils";
 
 interface TransactionsListProps {
   transactions: Transaction[];

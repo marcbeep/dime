@@ -26,7 +26,7 @@ import {
   DropdownMenuTrigger,
 } from "@/components/ui/dropdown-menu";
 import { Account } from "./types";
-import { filterAccountsByType, formatCurrency } from "./utils";
+import { filterAccountsByType, formatCurrency } from "@/lib/budget-utils";
 
 interface HeaderProps {
   accounts: Account[];

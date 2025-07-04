@@ -5,7 +5,5 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-// Simple GBP currency formatter
-export function formatAmount(amount: number): string {
-  return `£${amount.toFixed(2)}`;
-}
+// Re-export formatCurrency from budget-utils for backwards compatibility
+export { formatCurrency as formatAmount } from "./budget-utils";
