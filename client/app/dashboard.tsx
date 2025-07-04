@@ -1,6 +1,7 @@
 "use client";
 
 import { useState, useEffect } from "react";
+import { AlertTriangle, BarChart3 } from "lucide-react";
 import {
   Header,
   Sidebar,
@@ -87,7 +88,7 @@ export default function Dashboard() {
       <div className="min-h-screen bg-gradient-to-br from-slate-50 via-white to-slate-100/20 flex items-center justify-center">
         <div className="text-center">
           <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
-            <span className="text-red-600 text-2xl">⚠️</span>
+            <AlertTriangle className="h-8 w-8 text-red-600" />
           </div>
           <p className="text-slate-600 mb-4">
             {error || "Something went wrong loading your budget."}
@@ -118,7 +119,7 @@ export default function Dashboard() {
         return (
           <div className="text-center py-12">
             <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <span className="text-slate-400 text-2xl">📊</span>
+              <BarChart3 className="h-8 w-8 text-slate-400" />
             </div>
             <p className="text-slate-600 mb-2">Reports Coming Soon</p>
             <p className="text-sm text-slate-400">

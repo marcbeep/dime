@@ -1,4 +1,4 @@
-import { ArrowRight, X } from "lucide-react";
+import { ArrowRight, X, CreditCard } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
 export function FeatureBanner() {
@@ -8,7 +8,7 @@ export function FeatureBanner() {
         <div className="flex items-start space-x-4">
           <div className="flex-shrink-0">
             <div className="w-12 h-12 bg-gradient-to-r from-brand-green to-brand-green/80 rounded-2xl flex items-center justify-center shadow-lg">
-              <span className="text-white text-xl">💳</span>
+              <CreditCard className="h-6 w-6 text-white" />
             </div>
           </div>
           <div className="flex-1 min-w-0">

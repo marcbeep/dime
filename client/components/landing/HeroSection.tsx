@@ -78,11 +78,6 @@ export function HeroSection() {
         {/* Modern Transaction Cards */}
         <div className="relative animate-fade-in animation-delay-300">
           <div className="relative flex justify-center">
-            {/* Background decorative elements */}
-            <div className="absolute -top-8 -right-8 w-32 h-32 bg-brand-yellow/30 rounded-full opacity-80 animate-float hidden lg:block blur-sm"></div>
-            <div className="absolute -bottom-8 -left-8 w-24 h-24 bg-brand-blue/30 rounded-full opacity-80 animate-float animation-delay-1000 hidden lg:block blur-sm"></div>
-            <div className="absolute top-1/2 -right-4 w-16 h-16 bg-brand-green/30 rounded-full opacity-80 animate-float animation-delay-2000 hidden lg:block blur-sm"></div>
-
             {/* Main Activity Card Container */}
             <div className="relative overflow-hidden rounded-3xl">
               <div className="w-full max-w-sm mx-auto h-[520px] sm:max-w-md lg:max-w-lg lg:h-[520px] bg-gradient-to-br from-brand-green/90 to-brand-blue/90 rounded-3xl p-6 lg:p-8 relative overflow-hidden transform hover:scale-105 transition-transform duration-300 shadow-2xl">
