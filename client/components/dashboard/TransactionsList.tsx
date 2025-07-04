@@ -1,13 +1,5 @@
 import { useState } from "react";
-import {
-  Calendar,
-  Filter,
-  Search,
-  ArrowUpDown,
-  Plus,
-  Check,
-  X,
-} from "lucide-react";
+import { Calendar, Filter, Search, ArrowUpDown, Plus } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -67,8 +59,7 @@ export function TransactionsList({
         filterAccount === "all" || transaction.accountId === filterAccount;
       const matchesSearch =
         searchTerm === "" ||
-        transaction.payee.toLowerCase().includes(searchTerm.toLowerCase()) ||
-        transaction.memo.toLowerCase().includes(searchTerm.toLowerCase());
+        transaction.payee.toLowerCase().includes(searchTerm.toLowerCase());
       return matchesAccount && matchesSearch;
     })
     .sort((a, b) => {
@@ -181,9 +172,6 @@ export function TransactionsList({
                     <th className="text-left p-4 font-semibold text-slate-700">
                       Category
                     </th>
-                    <th className="text-left p-4 font-semibold text-slate-700">
-                      Memo
-                    </th>
                     <th className="text-right p-4 font-semibold text-slate-700">
                       <button
                         onClick={() => toggleSort("amount")}
@@ -192,9 +180,6 @@ export function TransactionsList({
                         Amount
                         <ArrowUpDown className="h-4 w-4" />
                       </button>
-                    </th>
-                    <th className="text-center p-4 font-semibold text-slate-700">
-                      Status
                     </th>
                   </tr>
                 </thead>
@@ -232,9 +217,6 @@ export function TransactionsList({
                           {getCategoryName(transaction.category)}
                         </Badge>
                       </td>
-                      <td className="p-4 text-slate-600 text-sm truncate max-w-xs">
-                        {transaction.memo}
-                      </td>
                       <td className="p-4 text-right">
                         <span
                           className={`font-bold ${
@@ -246,17 +228,6 @@ export function TransactionsList({
                           {transaction.type === "inflow" ? "+" : "-"}
                           {formatCurrency(transaction.amount)}
                         </span>
-                      </td>
-                      <td className="p-4 text-center">
-                        {transaction.cleared ? (
-                          <div className="inline-flex items-center justify-center w-6 h-6 bg-emerald-100 rounded-full">
-                            <Check className="h-4 w-4 text-emerald-600" />
-                          </div>
-                        ) : (
-                          <div className="inline-flex items-center justify-center w-6 h-6 bg-amber-100 rounded-full">
-                            <X className="h-4 w-4 text-amber-600" />
-                          </div>
-                        )}
                       </td>
                     </tr>
                   ))}
@@ -288,49 +259,31 @@ export function TransactionsList({
                       <span className="text-xs text-slate-500">
                         {formatDate(transaction.date)}
                       </span>
-                      {transaction.cleared ? (
-                        <div className="inline-flex items-center justify-center w-5 h-5 bg-emerald-100 rounded-full">
-                          <Check className="h-3 w-3 text-emerald-600" />
-                        </div>
-                      ) : (
-                        <div className="inline-flex items-center justify-center w-5 h-5 bg-amber-100 rounded-full">
-                          <X className="h-3 w-3 text-amber-600" />
-                        </div>
-                      )}
                     </div>
                   </div>
 
-                  <div className="space-y-2">
-                    <div className="flex justify-between items-center">
-                      <span className="font-medium text-slate-900">
-                        {transaction.payee}
-                      </span>
-                      <span
-                        className={`font-bold ${
-                          transaction.type === "inflow"
-                            ? "text-emerald-600"
-                            : "text-red-600"
-                        }`}
-                      >
-                        {transaction.type === "inflow" ? "+" : "-"}
-                        {formatCurrency(transaction.amount)}
-                      </span>
-                    </div>
-
-                    <div className="flex items-center gap-2">
-                      <Badge
-                        variant="secondary"
-                        className="bg-slate-100 text-slate-700 border-0 rounded-lg font-medium text-xs"
-                      >
-                        {getCategoryName(transaction.category)}
-                      </Badge>
-                    </div>
-
-                    {transaction.memo && (
-                      <p className="text-sm text-slate-600 truncate">
-                        {transaction.memo}
-                      </p>
-                    )}
+                  <div className="flex justify-between items-center">
+                    <span className="font-medium text-slate-900">
+                      {transaction.payee}
+                    </span>
+                    <span
+                      className={`font-bold ${
+                        transaction.type === "inflow"
+                          ? "text-emerald-600"
+                          : "text-red-600"
+                      }`}
+                    >
+                      {transaction.type === "inflow" ? "+" : "-"}
+                      {formatCurrency(transaction.amount)}
+                    </span>
+                  </div>
+                  <div className="flex items-center gap-2 mt-2">
+                    <Badge
+                      variant="secondary"
+                      className="bg-slate-100 text-slate-700 border-0 rounded-lg font-medium text-xs"
+                    >
+                      {getCategoryName(transaction.category)}
+                    </Badge>
                   </div>
                 </CardContent>
               </Card>

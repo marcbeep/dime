@@ -57,8 +57,6 @@ export interface Transaction {
   category: string | null;
   amount: number;
   type: "inflow" | "outflow";
-  memo: string;
-  cleared: boolean;
   createdAt: string;
 }
 
