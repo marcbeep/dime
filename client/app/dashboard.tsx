@@ -7,6 +7,7 @@ import {
   Sidebar,
   MainContent,
   TransactionsList,
+  NetWorthChart,
 } from "@/components/dashboard";
 import { Footer } from "@/components/ui/footer";
 import { BudgetData, BudgetCalculations } from "@/components/dashboard/types";
@@ -117,15 +118,8 @@ export default function Dashboard() {
         );
       case "reports":
         return (
-          <div className="text-center py-12">
-            <div className="w-16 h-16 bg-slate-100 rounded-full flex items-center justify-center mx-auto mb-4">
-              <BarChart3 className="h-8 w-8 text-slate-400" />
-            </div>
-            <p className="text-slate-600 mb-2">Reports Coming Soon</p>
-            <p className="text-sm text-slate-400">
-              We&apos;re working on bringing you detailed financial reports and
-              insights.
-            </p>
+          <div className="space-y-6">
+            <NetWorthChart />
           </div>
         );
       default:
