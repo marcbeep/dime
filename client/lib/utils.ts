@@ -16,7 +16,7 @@ export function cn(...inputs: ClassValue[]) {
  */
 export function getDiceBearAvatar(email: string, size: number = 80): string {
   const seed = encodeURIComponent(email);
-  return `https://api.dicebear.com/9.x/dylan/svg?seed=${seed}&size=${size}&radius=50`;
+  return `https://api.dicebear.com/9.x/dylan/svg?seed=${seed}&size=${size}&radius=50&backgroundColor=d1d4f9`;
 }
 
 // Re-export formatCurrency from budget-utils for backwards compatibility
