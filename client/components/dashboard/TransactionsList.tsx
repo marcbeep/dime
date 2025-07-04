@@ -149,37 +149,19 @@ export function TransactionsList({
                 <thead className="bg-slate-50/80 border-b border-slate-200/60">
                   <tr>
                     <th className="text-left p-4 font-semibold text-slate-700">
-                      <button
-                        onClick={() => toggleSort("date")}
-                        className="flex items-center gap-2 hover:text-slate-900 transition-colors"
-                      >
-                        Date
-                        <ArrowUpDown className="h-4 w-4" />
-                      </button>
+                      Date
                     </th>
                     <th className="text-left p-4 font-semibold text-slate-700">
                       Account
                     </th>
                     <th className="text-left p-4 font-semibold text-slate-700">
-                      <button
-                        onClick={() => toggleSort("payee")}
-                        className="flex items-center gap-2 hover:text-slate-900 transition-colors"
-                      >
-                        Payee
-                        <ArrowUpDown className="h-4 w-4" />
-                      </button>
+                      Payee
                     </th>
                     <th className="text-left p-4 font-semibold text-slate-700">
                       Category
                     </th>
                     <th className="text-right p-4 font-semibold text-slate-700">
-                      <button
-                        onClick={() => toggleSort("amount")}
-                        className="flex items-center gap-2 hover:text-slate-900 transition-colors ml-auto"
-                      >
-                        Amount
-                        <ArrowUpDown className="h-4 w-4" />
-                      </button>
+                      Amount
                     </th>
                   </tr>
                 </thead>
@@ -236,38 +218,35 @@ export function TransactionsList({
             </div>
           </div>
 
-          {/* Mobile Cards */}
-          <div className="md:hidden space-y-4 p-4">
-            {filteredAndSortedTransactions.map((transaction) => (
-              <Card
-                key={transaction.id}
-                className="border border-slate-200/60 rounded-2xl shadow-sm"
-              >
-                <CardContent className="p-4">
-                  <div className="flex items-start justify-between mb-3">
-                    <div className="flex items-center gap-2">
+          {/* Mobile List Rows (Middle Ground) */}
+          <div className="md:hidden px-4 py-4 lg:px-6 lg:py-6 mb-8">
+            <div className="divide-y divide-slate-100 bg-white rounded-2xl overflow-hidden shadow-sm">
+              {filteredAndSortedTransactions.map((transaction) => (
+                <div
+                  key={transaction.id}
+                  className="flex flex-col px-6 py-5 gap-3 bg-white hover:bg-slate-50 transition min-h-[80px]"
+                >
+                  <div className="flex items-center justify-between w-full">
+                    <div className="flex items-center gap-3 min-w-0">
                       <div
                         className={`w-3 h-3 rounded-full ${getAccountColor(
                           transaction.accountId
                         )} shadow-sm`}
                       />
-                      <span className="font-medium text-slate-800 text-sm">
+                      <span className="text-sm text-slate-500 truncate max-w-[100px]">
                         {getAccountName(transaction.accountId)}
                       </span>
                     </div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-xs text-slate-500">
-                        {formatDate(transaction.date)}
-                      </span>
-                    </div>
+                    <span className="text-xs text-slate-400">
+                      {formatDate(transaction.date)}
+                    </span>
                   </div>
-
-                  <div className="flex justify-between items-center">
-                    <span className="font-medium text-slate-900">
+                  <div className="flex items-center justify-between w-full mt-1">
+                    <span className="font-semibold text-slate-900 truncate text-base">
                       {transaction.payee}
                     </span>
                     <span
-                      className={`font-bold ${
+                      className={`font-bold text-lg ${
                         transaction.type === "inflow"
                           ? "text-emerald-600"
                           : "text-red-600"
@@ -277,7 +256,7 @@ export function TransactionsList({
                       {formatCurrency(transaction.amount)}
                     </span>
                   </div>
-                  <div className="flex items-center gap-2 mt-2">
+                  <div className="flex items-center gap-2 mt-1">
                     <Badge
                       variant="secondary"
                       className="bg-slate-100 text-slate-700 border-0 rounded-lg font-medium text-xs"
@@ -285,9 +264,9 @@ export function TransactionsList({
                       {getCategoryName(transaction.category)}
                     </Badge>
                   </div>
-                </CardContent>
-              </Card>
-            ))}
+                </div>
+              ))}
+            </div>
           </div>
 
           {/* Empty State */}
