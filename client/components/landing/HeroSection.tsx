@@ -7,7 +7,6 @@ import {
   ShoppingCart,
   Briefcase,
   Tv,
-  Heart,
 } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { formatCurrency } from "@/lib/budget-utils";

@@ -1,5 +1,5 @@
 import Link from "next/link";
-import { Heart, Github, Twitter, Linkedin, Mail } from "lucide-react";
+import { Heart, Github, Linkedin, Mail } from "lucide-react";
 
 export function LandingFooter() {
   return (
@@ -53,8 +53,9 @@ export function LandingFooter() {
             <div>
               <h3 className="font-semibold text-lg">Marc Beepath</h3>
               <p className="text-sm text-muted-foreground mt-1">
-                I'm a software engineer from Trinidad & Tobago, currently based
-                in the UK. I'm serious about building things that people love.
+                I&apos;m a software engineer from Trinidad & Tobago, currently
+                based in the UK. I&apos;m serious about building things that
+                people love.
               </p>
             </div>
 
