@@ -1,5 +1,13 @@
 import { useState } from "react";
-import { Calendar, Filter, Search, ArrowUpDown, Plus } from "lucide-react";
+import {
+  Calendar,
+  Filter,
+  Search,
+  ArrowUpDown,
+  Plus,
+  ChevronLeft,
+  ChevronRight,
+} from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
@@ -21,6 +29,8 @@ export function TransactionsList({
   const [sortOrder, setSortOrder] = useState<"asc" | "desc">("desc");
   const [filterAccount, setFilterAccount] = useState<string>("all");
   const [searchTerm, setSearchTerm] = useState("");
+  const [currentPage, setCurrentPage] = useState(1);
+  const [itemsPerPage] = useState(10);
 
   // Helper functions
   const getAccountName = (accountId: string) => {
@@ -80,13 +90,90 @@ export function TransactionsList({
       return sortOrder === "asc" ? comparison : -comparison;
     });
 
-  const toggleSort = (field: "date" | "amount" | "payee") => {
-    if (sortBy === field) {
-      setSortOrder(sortOrder === "asc" ? "desc" : "asc");
-    } else {
-      setSortBy(field);
-      setSortOrder("desc");
+  // Pagination logic
+  const totalPages = Math.ceil(
+    filteredAndSortedTransactions.length / itemsPerPage
+  );
+  const startIndex = (currentPage - 1) * itemsPerPage;
+  const endIndex = startIndex + itemsPerPage;
+  const paginatedTransactions = filteredAndSortedTransactions.slice(
+    startIndex,
+    endIndex
+  );
+
+  // Reset to first page when filters change
+  const handleFilterChange = (newFilter: string) => {
+    setFilterAccount(newFilter);
+    setCurrentPage(1);
+  };
+
+  const handleSearchChange = (newSearch: string) => {
+    setSearchTerm(newSearch);
+    setCurrentPage(1);
+  };
+
+  const handlePageChange = (page: number) => {
+    setCurrentPage(page);
+  };
+
+  const renderPagination = () => {
+    if (totalPages <= 1) return null;
+
+    const pageNumbers = [];
+    const maxVisiblePages = 5;
+    let startPage = Math.max(1, currentPage - Math.floor(maxVisiblePages / 2));
+    let endPage = Math.min(totalPages, startPage + maxVisiblePages - 1);
+
+    if (endPage - startPage + 1 < maxVisiblePages) {
+      startPage = Math.max(1, endPage - maxVisiblePages + 1);
     }
+
+    for (let i = startPage; i <= endPage; i++) {
+      pageNumbers.push(i);
+    }
+
+    return (
+      <div className="flex items-center justify-between mt-6 px-4">
+        <p className="text-sm text-slate-600">
+          Showing {startIndex + 1} to{" "}
+          {Math.min(endIndex, filteredAndSortedTransactions.length)} of{" "}
+          {filteredAndSortedTransactions.length} transactions
+        </p>
+        <div className="flex items-center gap-2">
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handlePageChange(currentPage - 1)}
+            disabled={currentPage === 1}
+            className="h-8 w-8 p-0"
+          >
+            <ChevronLeft className="h-4 w-4" />
+          </Button>
+
+          {pageNumbers.map((page) => (
+            <Button
+              key={page}
+              variant={currentPage === page ? "default" : "outline"}
+              size="sm"
+              onClick={() => handlePageChange(page)}
+              className="h-8 w-8 p-0"
+            >
+              {page}
+            </Button>
+          ))}
+
+          <Button
+            variant="outline"
+            size="sm"
+            onClick={() => handlePageChange(currentPage + 1)}
+            disabled={currentPage === totalPages}
+            className="h-8 w-8 p-0"
+          >
+            <ChevronRight className="h-4 w-4" />
+          </Button>
+        </div>
+      </div>
+    );
   };
 
   return (
@@ -102,13 +189,7 @@ export function TransactionsList({
 
       {/* Filters */}
       <Card className="rounded-3xl shadow-lg border-0 bg-gradient-to-br from-white to-slate-50/80 backdrop-blur-sm">
-        <CardHeader className="pb-4">
-          <CardTitle className="text-lg font-semibold text-slate-900 flex items-center gap-2">
-            <Filter className="h-5 w-5" />
-            Filters
-          </CardTitle>
-        </CardHeader>
-        <CardContent className="pt-0">
+        <CardContent className="p-6">
           <div className="flex flex-col sm:flex-row gap-4">
             {/* Search */}
             <div className="flex-1 relative">
@@ -117,7 +198,7 @@ export function TransactionsList({
                 type="text"
                 placeholder="Search transactions..."
                 value={searchTerm}
-                onChange={(e) => setSearchTerm(e.target.value)}
+                onChange={(e) => handleSearchChange(e.target.value)}
                 className="w-full pl-10 pr-4 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent transition-all"
               />
             </div>
@@ -125,7 +206,7 @@ export function TransactionsList({
             {/* Account Filter */}
             <select
               value={filterAccount}
-              onChange={(e) => setFilterAccount(e.target.value)}
+              onChange={(e) => handleFilterChange(e.target.value)}
               className="px-4 py-2 border border-slate-200 rounded-xl focus:outline-none focus:ring-2 focus:ring-slate-400 focus:border-transparent transition-all bg-white"
             >
               <option value="all">All Accounts</option>
@@ -166,7 +247,7 @@ export function TransactionsList({
                   </tr>
                 </thead>
                 <tbody>
-                  {filteredAndSortedTransactions.map((transaction, index) => (
+                  {paginatedTransactions.map((transaction, index) => (
                     <tr
                       key={transaction.id}
                       className={`border-b border-slate-100/60 hover:bg-slate-50/50 transition-colors ${
@@ -219,9 +300,9 @@ export function TransactionsList({
           </div>
 
           {/* Mobile List Rows (Middle Ground) */}
-          <div className="md:hidden px-4 py-4 lg:px-6 lg:py-6 mb-8">
+          <div className="md:hidden">
             <div className="divide-y divide-slate-100 bg-white rounded-2xl overflow-hidden shadow-sm">
-              {filteredAndSortedTransactions.map((transaction) => (
+              {paginatedTransactions.map((transaction) => (
                 <div
                   key={transaction.id}
                   className="flex flex-col px-6 py-5 gap-3 bg-white hover:bg-slate-50 transition min-h-[80px]"
@@ -268,6 +349,9 @@ export function TransactionsList({
               ))}
             </div>
           </div>
+
+          {/* Pagination */}
+          {renderPagination()}
 
           {/* Empty State */}
           {filteredAndSortedTransactions.length === 0 && (
