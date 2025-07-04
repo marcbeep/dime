@@ -1,141 +1,107 @@
 import Link from "next/link";
-import { Heart, Github, Linkedin, Mail } from "lucide-react";
+import { Heart, Github, Linkedin, Globe } from "lucide-react";
 
 export function LandingFooter() {
   return (
-    <footer className="bg-muted/50 border-t">
-      <div className="container mx-auto px-4 py-12">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {/* Brand Section */}
-          <div className="space-y-4">
-            <div>
-              <h3 className="font-semibold text-lg">About Dime</h3>
-              <p className="text-sm text-muted-foreground mt-1">
-                Smart budgeting and financial tracking made simple. Take control
-                of your finances with intuitive tools and insights.
-              </p>
-            </div>
-          </div>
-
-          {/* Features Section */}
-          <div className="space-y-4">
-            <h3 className="font-semibold">Features</h3>
-            <nav className="space-y-2">
-              <Link
-                href="/dashboard"
-                className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Budget Tracking
-              </Link>
-              <Link
-                href="/dashboard"
-                className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Expense Categories
-              </Link>
-              <Link
-                href="/dashboard"
-                className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Financial Insights
-              </Link>
-              <Link
-                href="/dashboard"
-                className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
-              >
-                Net Worth Tracking
-              </Link>
-            </nav>
-          </div>
-
-          {/* Personal Section - Marc */}
-          <div className="space-y-4">
-            <div>
-              <h3 className="font-semibold text-lg">Marc Beepath</h3>
-              <p className="text-sm text-muted-foreground mt-1">
-                I&apos;m a software engineer from Trinidad & Tobago, currently
-                based in the UK. I&apos;m serious about building things that
-                people love.
-              </p>
-            </div>
-
-            {/* Social Links */}
-            <div className="flex space-x-4">
-              <Link
-                href="https://github.com/marcbeep"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="GitHub Profile"
-              >
-                <Github className="h-5 w-5" />
-              </Link>
-              <Link
-                href="https://linkedin.com/in/marcbeep"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="LinkedIn Profile"
-              >
-                <Linkedin className="h-5 w-5" />
-              </Link>
-              <Link
-                href="mailto:hi@marc.tt"
-                className="text-muted-foreground hover:text-foreground transition-colors"
-                aria-label="Email Contact"
-              >
-                <Mail className="h-5 w-5" />
-              </Link>
-            </div>
-
-            {/* Other Projects */}
-            <div className="space-y-2">
-              <h4 className="font-medium text-sm">Other Projects</h4>
-              <nav className="space-y-1">
-                <Link
-                  href="https://marc.tt"
-                  className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  My Personal Website
-                </Link>
-                <Link
-                  href="https://code.marc.tt"
-                  className="block text-sm text-muted-foreground hover:text-foreground transition-colors"
-                >
-                  CodeDuck - Programming Interview Prep
-                </Link>
-              </nav>
-            </div>
+    <footer className="w-full border-t bg-white text-muted-foreground text-sm px-4 py-8 mt-12">
+      <div className="max-w-4xl mx-auto grid grid-cols-1 md:grid-cols-2 gap-8 items-start text-left">
+        {/* About Dime */}
+        <div>
+          <h2 className="font-semibold text-lg mb-2 text-black">About Dime</h2>
+          <p className="mb-1">
+            Smart budgeting and financial tracking made simple. Take control of
+            your finances with intuitive tools and insights.
+          </p>
+          <div className="flex flex-wrap gap-2 mt-3">
+            <Link
+              href="/dashboard"
+              className="px-3 py-1 rounded-full border border-muted-foreground/30 bg-muted/30 text-muted-foreground hover:bg-primary/10 hover:text-primary transition-colors text-xs font-medium"
+            >
+              Budget Tracking
+            </Link>
+            <Link
+              href="/dashboard"
+              className="px-3 py-1 rounded-full border border-muted-foreground/30 bg-muted/30 text-muted-foreground hover:bg-primary/10 hover:text-primary transition-colors text-xs font-medium"
+            >
+              Expense Categories
+            </Link>
+            <Link
+              href="/dashboard"
+              className="px-3 py-1 rounded-full border border-muted-foreground/30 bg-muted/30 text-muted-foreground hover:bg-primary/10 hover:text-primary transition-colors text-xs font-medium"
+            >
+              Financial Insights
+            </Link>
+            <Link
+              href="/dashboard"
+              className="px-3 py-1 rounded-full border border-muted-foreground/30 bg-muted/30 text-muted-foreground hover:bg-primary/10 hover:text-primary transition-colors text-xs font-medium"
+            >
+              Net Worth Tracking
+            </Link>
           </div>
         </div>
-
-        {/* Bottom Section */}
-        <div className="border-t mt-8 pt-8 flex flex-col sm:flex-row justify-between items-center space-y-4 sm:space-y-0">
-          <div className="flex items-center space-x-1 text-sm text-muted-foreground">
-            <span>Built with</span>
-            <Heart className="h-4 w-4 text-red-500 fill-current" />
-            <span>by</span>
+        {/* About Marc Beepath */}
+        <div>
+          <h2 className="font-semibold text-lg mb-2 text-black">
+            Marc Beepath
+          </h2>
+          <p className="mb-2">
+            Software engineer from Trinidad & Tobago, based in the UK. I build
+            things people love. I also built{" "}
+            <Link
+              href="https://code.marc.tt"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="underline hover:text-primary"
+            >
+              CodeDuck
+            </Link>{" "}
+            to help people with interview prep.
+          </p>
+          <div className="flex gap-3 mb-2 text-primary">
             <Link
               href="https://marc.tt"
               target="_blank"
               rel="noopener noreferrer"
-              className="text-foreground hover:text-primary transition-colors font-medium"
+              className="hover:text-primary/80 transition-colors"
             >
-              Marc Beepath
-            </Link>
-            <span>in Liverpool</span>
-          </div>
-          <div className="flex items-center space-x-6 text-sm text-muted-foreground">
-            <Link
-              href="/privacy"
-              className="hover:text-foreground transition-colors"
-            >
-              Privacy
+              <Globe className="w-5 h-5" />
             </Link>
             <Link
-              href="/terms"
-              className="hover:text-foreground transition-colors"
+              href="https://github.com/marcbeep"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-primary/80 transition-colors"
             >
-              Terms
+              <Github className="w-5 h-5" />
             </Link>
-            <span>© {new Date().getFullYear()} Dime</span>
+            <Link
+              href="https://linkedin.com/in/marcbeep"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-primary/80 transition-colors"
+            >
+              <Linkedin className="w-5 h-5" />
+            </Link>
           </div>
+        </div>
+      </div>
+      <div className="max-w-4xl mx-auto flex flex-col sm:flex-row justify-between items-center border-t mt-8 pt-6 text-xs text-muted-foreground gap-2">
+        <span>
+          © {new Date().getFullYear()} Dime. Built by{" "}
+          <Link href="https://marc.tt" className="hover:underline">
+            Marc Beepath
+          </Link>{" "}
+          in Liverpool with Next.js, TypeScript, and{" "}
+          <Heart className="inline h-3 w-3 text-red-500 fill-current align-text-bottom" />
+          .
+        </span>
+        <div className="flex gap-4">
+          <Link href="/privacy" className="hover:underline">
+            Privacy
+          </Link>
+          <Link href="/terms" className="hover:underline">
+            Terms
+          </Link>
         </div>
       </div>
     </footer>
